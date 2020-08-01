@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>宅在家的植物－订单列表</title>
+    <link rel="shortcut icon" href="../favicon.ico"/>
+    <link href="../css/index/index.css" type="text/css" rel="stylesheet">
+    <link href="../css/index/iconfont/iconfont.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<!--头部-->
+    <div class="banner-wrapper">
+        <div class="logo">
+            <img src="../imgs/logo.png">
+            <div class="logo-word">
+                <div>宅在家的植物</div>
+                <div>Home Plant</div>
+            </div>
+        </div>
+        <div class="left-box">
+            <a class="register" id="login-out" title="退出">退出</a>
+        </div>
+    </div>
+<!--主体区域-->
+    <div class="desktop-all-box">
+        <div class="desktop item-wrapper">
+<!--            左边导航-->
+            <div class="desktop-menu">
+                <ul>
+                    <li class="leftbar-item">
+                        <a class="active">
+                            <i class="iconfont icon-list"></i>
+                            <span>订单列表</span>
+                        </a>
+                    </li>
+                    <li class="leftbar-item">
+                        <a class="">
+                            <i class="iconfont icon-list"></i>
+                            <span>图片信息</span>
+                        </a>
+                    </li>
+                    <li class="leftbar-item">
+                        <a class="">
+                            <i class="iconfont icon-list"></i>
+                            <span>植物基本信息管理</span>
+                        </a>
+                    </li>
+                    <li class="leftbar-item">
+                        <a class="">
+                            <i class="iconfont icon-list"></i>
+                            <span>植物图片管理</span>
+                        </a>
+                    </li>
+                    <li class="leftbar-item">
+                        <a class="">
+                            <i class="iconfont icon-list"></i>
+                            <span>植物病虫害管理</span>
+                        </a>
+                    </li>
+                    <li class="leftbar-item">
+                        <a class="">
+                            <i class="iconfont icon-list"></i>
+                            <span>植物基本属性管理</span>
+                        </a>
+                    </li>
+                    <li class="leftbar-item">
+                        <a class="">
+                            <i class="iconfont icon-list"></i>
+                            <span>植物价值管理</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+<!--            右边区域-->
+            <div>
+                <div class="desktop-main show">
+                    <div class="order-box">
+                        <table cellspacing="0" ng-show="docArr.length>0">
+                            <thead>
+                            <tr>
+                                <td>订单号</td>
+                                <td>商品名称</td>
+                                <td>商品总数</td>
+                                <td>商品总价格</td>
+                                <td>订单状态</td>
+                                <td>下单时间</td>
+                                <td>操作</td>
+                            </tr>
+                            </thead>
+                            <tbody id="order-table">
+
+                            </tbody>
+                        </table>
+                        <div class="load-more">点击加载更多</div>
+                        <div class="no-more">没有更多订单了</div>
+                    </div>
+                </div>
+                <div class="desktop-main ">
+                    <div class="img-box">
+                        <table cellspacing="0" ng-show="docArr.length>0">
+                            <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>URL</td>
+                                <td>FROM</td>
+                                <td colspan="2">操作</td>
+                            </tr>
+                            </thead>
+                            <tbody id="img-table">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bottomBut">
+                        <button class="preImg">上一页</button>
+                        <span class="imgCurrent"></span> |
+                        <span class="imgTotal"></span>
+                        <button class="nextImg">下一页</button>
+                        <button class="newImg">新增</button>
+                    </div>
+                </div>
+                <div class="desktop-main ">
+                    <div class="basic-box">
+                        <table cellspacing="0" ng-show="docArr.length>0">
+                            <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>NAME</td>
+                                <td>PRICE</td>
+                                <td>STOCK</td>
+                                <td>CATEGORY</td>
+                                <td>URL</td>
+                                <td>IMG_ID</td>
+                                <td>STAR</td>
+                                <td>FLOWER_LANGUAGE</td>
+                                <td colspan="2">操作</td>
+                            </tr>
+                            </thead>
+                            <tbody id="basic-table">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bottomBut">
+                        <button class="prePlant">上一页</button>
+                        <span class="plantCurrent"></span> |
+                        <span class="plantTotal"></span>
+                        <button class="nextPlant">下一页</button>
+                        <button class="newPlant">新增</button>
+                    </div>
+                </div>
+                <div class="desktop-main ">
+                    <div class="detailImg-box">
+                        <table cellspacing="0" ng-show="docArr.length>0">
+                            <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>IMG_ID</td>
+                                <td>PRODUCT_ID</td>
+                                <td colspan="2">操作</td>
+                            </tr>
+                            </thead>
+                            <tbody id="detailImg-table">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bottomBut">
+                        <button class="preDetail">上一页</button>
+                        <span class="detailCurrent"></span> |
+                        <span class="detailTotal"></span>
+                        <button class="nextDetail">下一页</button>
+                        <button class="newDetail">新增</button>
+                    </div>
+                </div>
+                <div class="desktop-main ">
+                    <div class="pest-box">
+                        <table cellspacing="0" ng-show="docArr.length>0">
+                            <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>NAME</td>
+                                <td>DETAIL</td>
+                                <td>PRODUCT_ID</td>
+                                <td colspan="2">操作</td>
+                            </tr>
+                            </thead>
+                            <tbody id="pest-table">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bottomBut">
+                        <button class="prePest">上一页</button>
+                        <span class="pestCurrent"></span> |
+                        <span class="pestTotal"></span>
+                        <button class="nextPest">下一页</button>
+                        <button class="newPest">新增</button>
+                    </div>
+                </div>
+                <div class="desktop-main ">
+                    <div class="property-box">
+                        <table cellspacing="0" ng-show="docArr.length>0">
+                            <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>NAME</td>
+                                <td>DETAIL</td>
+                                <td>PRODUCT_ID</td>
+                                <td colspan="2">操作</td>
+                            </tr>
+                            </thead>
+                            <tbody id="property-table">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bottomBut">
+                        <button class="preProperty">上一页</button>
+                        <span class="propertyCurrent"></span> |
+                        <span class="propertyTotal"></span>
+                        <button class="nextProperty">下一页</button>
+                        <button class="newProperty">新增</button>
+                    </div>
+                </div>
+                <div class="desktop-main ">
+                    <div class="worth-box">
+                        <table cellspacing="0" ng-show="docArr.length>0">
+                            <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>NAME</td>
+                                <td>DETAIL</td>
+                                <td>PRODUCT_ID</td>
+                                <td colspan="2">操作</td>
+                            </tr>
+                            </thead>
+                            <tbody id="worth-table">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bottomBut">
+                        <button class="preWorth">上一页</button>
+                        <span class="worthCurrent"></span> |
+                        <span class="worthTotal"></span>
+                        <button class="nextWorth">下一页</button>
+                        <button class="newWorth">新增</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    消息提示的弹窗-->
+    <div class="global-tips">
+        <p></p>
+    </div>
+
+<!--背景图片-->
+    <div class="bgGrey"></div>
+
+<!--    新增图片的表单-->
+    <div class="createImg">
+        <span class="tip">请根据管理员规定填写表单</span>
+        <div class="content">
+            <div class="id inputStyle">
+                图片id号:<input type="number" placeholder="请填写图片id" class="message" />
+            </div>
+            <div class="url inputStyle">
+                图片路径:<input type="text" placeholder="请填写图片路径" class="message imgName" />
+            </div>
+            <div class="from inputStyle">
+                图片来源:<input type="number" value="1" class="message" disabled="disabled" />
+            </div>
+        </div>
+        <input type="submit" value="提交" class="btn submit" />
+        <input type="reset" value="重置" class="btn reset" />
+        <input type="button" value="取消" class="btn cancel" />
+    </div>
+
+<!--    新增植物的表单-->
+    <div class="createPlant">
+        <span class="tip">请根据管理员规定填写表单</span>
+        <div class="content">
+            <div class="plantId inputStyle">
+                植物id号:<input type="number" placeholder="请填写图片id" class="message" />
+            </div>
+            <div class="name inputStyle">
+                植物名字:<input type="text" placeholder="请填写植物名称" class="message plantName" />
+            </div>
+            <div class="price inputStyle">
+                植物价格:<input type="number" placeholder="请填写植物定价" class="message plantPrice" />
+            </div>
+            <div class="stock inputStyle">
+                植物库存:<input type="number" placeholder="请填写植物库存" class="message plantStock" />
+            </div>
+            <div class="category inputStyle">
+                植物分类:<input type="number" placeholder="请填写植物分类" class="message plantCategory" />
+            </div>
+            <div class="url inputStyle">
+                图片路径:<input type="text" placeholder="请填写植物主要图片路径" class="message basicImg" />
+            </div>
+            <div class="imgId inputStyle">
+                图片id号:<input type="number" placeholder="请填写植物主要图片id" class="message basicImgId" />
+            </div>
+            <div class="star inputStyle">
+                植物星标:<input type="number" placeholder="请填写植物星标" class="message plantStar" />
+            </div>
+            <div class="language inputStyle">
+                植物花语:<input type="text" placeholder="请填写植物的花语" class="message flowerLanguage" />
+            </div>
+        </div>
+        <input type="submit" value="提交" class="btn submit" />
+        <input type="reset" value="重置" class="btn reset" />
+        <input type="button" value="取消" class="btn cancel" />
+    </div>
+
+<!--    新增植物详情图片的表单-->
+    <div class="createDetail">
+        <span class="tip">请根据管理员规定填写表单</span>
+        <div class="content">
+            <div class="id inputStyle">
+                详情id号:<input type="number" placeholder="请填写图片id" class="message" />
+            </div>
+            <div class="imgId inputStyle">
+                图片id号:<input type="number" placeholder="请填写图片id" class="message img_id" />
+            </div>
+            <div class="productId inputStyle">
+                植物id号:<input type="number" placeholder="请填写植物id" class="message product_id" />
+            </div>
+        </div>
+        <input type="submit" value="提交" class="btn submit" />
+        <input type="reset" value="重置" class="btn reset" />
+        <input type="button" value="取消" class="btn cancel" />
+    </div>
+
+<!--    新增植物病虫害的表单-->
+<div class="createPest">
+    <span class="tip">请根据管理员规定填写表单</span>
+    <div class="content">
+        <div class="id inputStyle">
+            病虫害id号:<input type="number" placeholder="请填写id号" class="message" />
+        </div>
+        <div class="pestName inputStyle">
+            病虫害名称:<input type="text" class="message pest_name" placeholder="请填写病虫害名称"/>
+        </div>
+        <div class="pestDetail inputStyle">
+            病虫害防治:<textarea class="message pest_detail" placeholder="请填写病虫害防治对策"></textarea>
+        </div>
+        <div class="productId inputStyle">
+            植物 id号:<input type="number" placeholder="请填写植物id" class="message product_id" />
+        </div>
+    </div>
+    <input type="submit" value="提交" class="btn submit" />
+    <input type="reset" value="重置" class="btn reset" />
+    <input type="button" value="取消" class="btn cancel" />
+</div>
+
+
+<!--    新增植物属性的表单-->
+<div class="createProperty">
+    <span class="tip">请根据管理员规定填写表单</span>
+    <div class="content">
+        <div class="id inputStyle">
+            属性id号:<input type="number" placeholder="请填写id号" class="message" />
+        </div>
+        <div class="propertyName inputStyle">
+            属性名称:<input type="text" class="message property_name" placeholder="请填写属性名称"/>
+        </div>
+        <div class="propertyDetail inputStyle">
+            属性详情:<textarea class="message property_detail" placeholder="请填写属性详情"></textarea>
+        </div>
+        <div class="productId inputStyle">
+            植物 id号:<input type="number" placeholder="请填写植物id" class="message product_id" />
+        </div>
+    </div>
+    <input type="submit" value="提交" class="btn submit" />
+    <input type="reset" value="重置" class="btn reset" />
+    <input type="button" value="取消" class="btn cancel" />
+</div>
+
+
+<!--    新增植物价值的表单-->
+<div class="createWorth">
+    <span class="tip">请根据管理员规定填写表单</span>
+    <div class="content">
+        <div class="id inputStyle">
+            价值id号:<input type="number" placeholder="请填写id号" class="message" />
+        </div>
+        <div class="worthName inputStyle">
+            价值名称:<input type="text" class="message worth_name" placeholder="请填写价值名称"/>
+        </div>
+        <div class="worthDetail inputStyle">
+            价值详情:<textarea class="message worth_detail" placeholder="请填写价值详情"></textarea>
+        </div>
+        <div class="productId inputStyle">
+            植物 id号:<input type="number" placeholder="请填写植物id" class="message product_id" />
+        </div>
+    </div>
+    <input type="submit" value="提交" class="btn submit" />
+    <input type="reset" value="重置" class="btn reset" />
+    <input type="button" value="取消" class="btn cancel" />
+</div>
+
+</body>
+<script src="../js/common.js" type="application/javascript"></script>
+<script src="../js/jquery-1.8.2.min.js" type="application/javascript"></script>
+<script src="../js/index.js" type="application/javascript"></script>
+</html>
