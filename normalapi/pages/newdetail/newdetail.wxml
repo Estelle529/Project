@@ -1,0 +1,2 @@
+<!--pages/newdetail/newdetail.wxml-->
+<web-view src="https://daily.zhihu.com/story/{{id}}"></web-view>

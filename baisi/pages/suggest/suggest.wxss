@@ -1,0 +1,53 @@
+/* pages/suggest/suggest.wxss */
+.container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  overflow-y: hidden;
+}
+.left{
+  width: 25%;
+  height: 100%;
+  background-color: gray;
+  background-color: #eee;
+}
+.left .catItem{
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 32rpx;
+  /* 每个都有一个边框 只不过改变的时候 让边框颜色不一样就行了 */
+  border-left: 2px solid #eee;
+}
+.left .currCat{
+  border-color: #D4237A;
+  color: #D4237A;
+}
+.right{
+  width: 75%;
+}
+.rightItem{
+  width: 100%;
+  height: 100vh;
+}
+
+.translate0 {
+  transform: translate(0, 0);
+}
+
+.translate1 {
+  transform: translate(0, -100vh);
+}
+
+.translate2 {
+  transform: translate(0, -200vh);
+}
+
+.translate3 {
+  transform: translate(0, -300vh);
+}
+
+.translate4 {
+  transform: translate(0, -400vh);
+}

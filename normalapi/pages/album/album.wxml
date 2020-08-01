@@ -1,0 +1,14 @@
+<view class="albumCon">
+  <image wx:for="{{imgList}}" src="{{item}}" wx:key="index" mode="aspectFit" data-index="{{index}}" bindtap="showBig"></image>
+</view>
+<view class="subImg" bindtap="subImg">上传图片</view>
+<!-- 大图预览 -->
+<view class="bigImgCon" wx:if="{{isbig}}">
+  <image src="{{imgList[currIndex]}}" mode="aspectFit" class="bigImg"></image>
+  <view class="controls">
+    <text class="pre" bindtap="preImg">上一张</text>
+    <text class="del" bindtap="delImg">删除</text>
+    <text class="next" bindtap="nextImg">下一张</text>
+  </view>
+  <image src="http://bpic.588ku.com/element_pic/16/12/22/b629998b0208c76c38a50fd478692ae0.jpg" class="closeBig" bindtap="closeBig"></image>
+</view>

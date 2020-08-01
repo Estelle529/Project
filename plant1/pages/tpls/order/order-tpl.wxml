@@ -1,0 +1,21 @@
+<template name="order">
+    <block wx:for="{{orders}}">
+        <view class="orderItem" data-id="{{item.id}}" bindtap="orderTap">
+            <view class="orderNo">订单编号{{item.order_no}}</view>
+            <view class="orderMessage">
+                <image class="orderImg" src="{{item.snap_img}}" />
+                <view class="orderNameStatus">
+                    <view class="orderName">{{item.snap_name}}</view>
+                    <view class="productCount">共{{item.total_count}}件商品</view>
+                </view>
+                <text class="order-status-txt unpay" wx:if="{{item.status==1}}">待付款</text>
+                <text class="order-status-txt payed" wx:if="{{item.status==2}}">已付款</text>
+                <text class="order-status-txt done" wx:if="{{item.status==3}}">已发货</text>
+            </view>
+            <view class="pay" wx:if="{{item.status==1}}">
+                <view class="totalPrice">应付￥：{{item.total_price}}</view>
+                <view class="gotopay">去付款</view>
+            </view>
+        </view>
+    </block>
+</template>

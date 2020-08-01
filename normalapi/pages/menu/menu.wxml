@@ -1,0 +1,9 @@
+<button bindtap="gotoDouyu">数据请求-斗鱼</button>
+<button bindtap="gotoAnimate">动画</button>
+<button bindtap="gotoCamera">相机</button>
+<button bindtap="gotoQrcode">二维码</button>
+<button bindtap="gotoCanvas">画布</button>
+<button bindtap="gotoPage">整页翻页</button>
+<button bindtap="gotoLocation">定位权限</button>
+
+

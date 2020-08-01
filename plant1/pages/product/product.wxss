@@ -1,0 +1,288 @@
+/* pages/product/product.wxss */
+
+@import "../../utils/iconfont.wxss";
+view {
+    margin: 0rpx;
+    padding: 0rpx;
+}
+
+.head {
+    width: 100%;
+}
+
+.headImg {
+    width: 100%;
+    height: 350rpx;
+    -webkit-filter: blur(6px);
+}
+
+.headImg-hover {
+    width: 100%;
+    height: 350rpx;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.properties {
+    position: absolute;
+    top: 160rpx;
+    left: 50rpx;
+}
+
+.flowerStar {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    color: #fff;
+    font-size: 50rpx;
+    margin-right: 10rpx;
+}
+
+.starCon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.starCon image {
+    width: 26rpx;
+    height: 26rpx;
+}
+
+.properties .flowerLanguage {
+    width: 440rpx;
+    color: #1296db;
+    font-size: 30rpx;
+}
+
+.floatImg {
+    border-radius: 50%;
+    width: 230rpx;
+    height: 170rpx;
+    position: absolute;
+    top: 160rpx;
+    right: 30rpx;
+    box-shadow: 0 0 10px rgb(238, 235, 235);
+}
+
+.collect {
+    height: 80rpx;
+    width: 80rpx;
+    position: absolute;
+    top: 300rpx;
+    right: 100rpx;
+}
+
+.fixed-btns-box {
+    position: fixed;
+    top: 50rpx;
+    right: 12px;
+    width: 80rpx;
+}
+
+.fixed-btns-box image {
+    height: 77rpx;
+    width: 77rpx;
+}
+
+.fixed-btns-box view {
+    font-size: 24rpx;
+    /* background-color: rgb(238, 209, 156); */
+    color: white;
+    position: absolute;
+    right: 30rpx;
+    top: 3rpx;
+    height: 36rpx;
+    width: 36rpx;
+    line-height: 36rpx;
+    text-align: center;
+}
+
+.content {
+    width: 100%;
+    margin-top: 20px;
+    color: #333;
+}
+
+.content .vertical {
+    width: 100%;
+    height: 800rpx;
+}
+
+.long {
+    width: 100%;
+    height: 1px;
+    background-color: #1296db;
+}
+
+.contentCon {
+    padding: 20rpx;
+    width: 100%;
+}
+
+.contentCon view {
+    margin-bottom: 15rpx;
+}
+
+.leftTop {
+    font-size: 40rpx;
+}
+
+.basicDetail {
+    width: 95%;
+    font-size: 30rpx;
+}
+
+.swiper {
+    width: 95%;
+    height: 399rpx;
+}
+
+.swiper-box {
+    overflow-x: hidden;
+}
+
+.banner-item {
+    height: 100%;
+    width: 100%;
+}
+
+.banner-item image {
+    height: 100%;
+    width: 100%;
+}
+
+.contentCon .breedName {
+    width: 95%;
+    margin-bottom: -1rpx;
+    white-space: nowrap;
+    font-size: 30rpx;
+}
+
+.breedDetail {
+    width: 95%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 29rpx;
+}
+
+.contentCon .name-item {
+    width: 30%;
+    display: inline-block;
+    margin: 0;
+    border-radius: 10rpx;
+    padding-top: 10rpx;
+    text-align: center;
+}
+
+.selected {
+    background-color: #99c2dd;
+}
+
+.detailItem {
+    border-radius: 10rpx;
+    padding: 10rpx 10rpx 0 10rpx;
+    text-indent: 29rpx;
+    line-height: 50rpx;
+    width: 100%;
+    height: 260rpx;
+    background-color: #99c2dd;
+}
+
+.pestDetail {
+    width: 95%;
+    font-size: 30rpx;
+}
+
+.worthName {
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.worthNameItem {
+    margin-left: 40rpx;
+    border-radius: 50%;
+    box-shadow: 0 0 10rpx #99c2dd;
+    width: 190rpx;
+    height: 190rpx;
+    background-color: #99c2dd;
+    text-align: center;
+    line-height: 200rpx;
+    font-size: 40rpx;
+    color: #eee;
+    font-weight: bold;
+}
+
+.foot {
+    width: 710rpx;
+    height: 100rpx;
+    margin: 10rpx auto;
+    border-radius: 30rpx;
+    background-color: rgb(238, 209, 156);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.product-counts,
+.add-cart-btn {
+    width: 48%;
+    height: 100%;
+    display: flex;
+    font-size: 28rpx;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.middle-border {
+    width: 2rpx;
+    height: 34rpx;
+    border-right: 1rpx #fff dotted;
+}
+
+.product-counts picker {
+    height: 100%;
+    width: 100%;
+}
+
+.product-counts picker.disabled {
+    color: #D5D5DB;
+}
+
+.add-cart-btn.disabled {
+    color: #D5D5DB;
+}
+
+.product-counts picker view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100rpx;
+}
+
+.counts-tips,
+.counts-data,
+.counts-icon {
+    margin: 0 20rpx;
+}
+
+.counts-data {
+    font-size: 32rpx;
+}
+
+.counts-icon {
+    height: 50rpx;
+    width: 50rpx;
+}
+
+.add-cart-btn .cart-icon {
+    height: 36rpx;
+    width: 36rpx;
+}

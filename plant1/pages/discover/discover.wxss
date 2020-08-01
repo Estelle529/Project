@@ -1,0 +1,128 @@
+@import "../tpls/base.wxss";
+.searchBox {
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.inputBox {
+    width: 70%;
+    height: 50rpx;
+    margin-left: 10rpx;
+    border-radius: 30rpx;
+    border: 1px solid #666;
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    padding-left: 30rpx;
+    width: 80%;
+    color: #444;
+}
+
+.inputBox image {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.search {
+    border: 1px solid #1296db;
+    line-height: 50rpx;
+    width: 20%;
+    height: 50rpx;
+    font-size: 30rpx;
+    text-align: center;
+    border-radius: 30rpx;
+}
+
+.isSearch {
+    background-color: #1296db;
+    color: #eee;
+}
+
+.keysCon {
+    width: 93%;
+    padding: 20rpx 15rpx 20rpx 15rpx;
+    border-bottom: 1px dotted #aaa;
+}
+
+.title {
+    margin-bottom: 15rpx;
+    color: #666;
+}
+
+.key {
+    padding: 10rpx;
+    border-radius: 35rpx;
+    letter-spacing: 1rpx;
+    border: 1rpx solid #888;
+    color: #888;
+}
+
+.hotKeys {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.searchCon {
+    width: 100%;
+}
+
+.serchRes {
+    width: 100%;
+}
+
+.searchCount {
+    width: 100%;
+    padding: 10rpx;
+    text-align: center;
+    color: rgb(221, 216, 216);
+}
+
+.plantItem {
+    width: 100%;
+    display: flex;
+    padding: 10rpx;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 5px solid rgb(221, 216, 216);
+}
+
+image {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+}
+
+.message {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.name,
+.language {
+    width: 100%;
+    font-size: 30rpx;
+}
+
+.language {
+    line-height: 40rpx;
+    height: 40rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: rgb(221, 235, 29);
+}
+
+.noRes {
+    font-size: 30rpx;
+    color: #666;
+    margin-top: 100rpx;
+    text-align: center;
+}

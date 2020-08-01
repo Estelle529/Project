@@ -1,0 +1,5 @@
+<view class="icon">
+    <icon type="success" size="140" />
+    <view class="res">支付成功</view>
+</view>
+<button class="goBack" bindtap="goback" type="default">返回查看订单</button>

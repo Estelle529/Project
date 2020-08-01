@@ -1,0 +1,34 @@
+/* pages/animate/animate.wxss */
+view{
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  background-color: lightskyblue;
+  margin: 0 auto;
+}
+.buyTicket{
+  width: 600rpx;
+  height: 80rpx;
+  background-color: #F6F6F6;
+  color: #333;
+  margin: 0 auto;
+  border-radius: 10rpx;
+  border: 1px solid #333;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buyTicket image{
+  width: 50rpx;
+  height:50rpx;
+}
+.buyTicket text{
+  position: absolute;
+}
+.zhengzhou{
+  left: 30rpx;
+}
+.shanghai{
+  left: 505rpx;
+}

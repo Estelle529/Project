@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "onedaynews":"../../Components/onedaynews/onedaynews"
+  },
+  "navigationBarTitleText": "无限新闻"
+}

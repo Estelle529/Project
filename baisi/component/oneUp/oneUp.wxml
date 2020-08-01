@@ -1,0 +1,11 @@
+<view class="oneUp">
+	<image src="{{oneUpdata.header}}"></image>
+	<view class="message">
+		<view class="name">{{oneUpdata.screen_name}}</view>
+		<view class="fans">已有 {{oneUpdata.fans_count}} 关注</view>
+	</view>
+	<button class="{{isfocus?'focus':'unfocus'}}" bindtap="changeFocus">
+		<text class="iconfont {{isfocus?'.icon-ok':'icon-plus'}} "></text>
+    <text>{{isfocus?'已关注':'关注'}}</text>
+	</button>
+</view>

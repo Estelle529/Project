@@ -1,0 +1,11 @@
+<swiper autoplay="true" circular="true">
+	<swiper-item wx:for="{{daysarr[0].top_stories}}" wx:key="index">
+		<view class="oneItem" bindtap="godetail" data-url="{{item.url}}">
+			<image src="{{item.image}}"></image>
+			<view>{{item.title}}</view>
+		</view>
+	</swiper-item>
+</swiper>
+<view class="content">
+	<onedaynews wx:for="{{daysarr}}" wx:key="index" onedaydata="{{item}}" bindmyevent1="getUrl"></onedaynews>
+</view>

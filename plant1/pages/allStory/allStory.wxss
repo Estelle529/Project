@@ -1,0 +1,3 @@
+/* pages/allStory/allStory.wxss */
+
+@import "../tpls/story/story-tpl.wxss";

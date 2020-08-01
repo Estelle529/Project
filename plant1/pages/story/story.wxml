@@ -1,0 +1,13 @@
+<view class="container">
+    <view class="head">
+        <text class="name">{{storyDetail.name}}</text>
+        <text class="from">来源：百度词条</text>
+    </view>
+    <view class="story">
+        <!-- <image src="{{storyDetail.image.url}}" alt="" /> -->
+        <view class="p">{{storyDetail.paragraph1}}</view>
+        <view class="p">{{storyDetail.paragraph2}}</view>
+        <view class="p">{{storyDetail.paragraph3}}</view>
+        <view class="p">{{storyDetail.paragraph4}}</view>
+    </view>
+</view>

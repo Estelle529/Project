@@ -1,0 +1,60 @@
+/* pages/album/album.wxss */
+.subImg{
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 100rpx;
+  background-color: #eee;
+  text-align: center;
+  line-height: 100rpx;
+  border-top: 1px solid #333;
+}
+.albumCon{
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+.albumCon image{
+  width: 170rpx;
+  height: 170rpx;
+  padding: 3rpx;
+  margin: 5rpx;
+  border: 1px solid #aaa;
+}
+.bigImgCon{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color:rgba(0, 0, 0, 0.8) 
+}
+.bigImg{
+  display: block;
+  width: 600rpx;
+  height: 600rpx;
+  margin: 30rpx auto;
+
+}
+.controls{
+  margin-top: 150rpx;
+  width: 100vw;
+  height: 80rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.controls text{
+  font-size: 40rpx;
+  color: #eee
+}
+.controls .del{
+  color: red;
+}
+.closeBig{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  display: block;
+  margin: 30rpx auto;
+}

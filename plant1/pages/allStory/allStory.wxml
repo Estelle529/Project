@@ -1,0 +1,4 @@
+<import src="../tpls/story/story-tpl.wxml" />
+<view class="container">
+    <template is="story" data="{{plantsStory:allStory}}" />
+</view>

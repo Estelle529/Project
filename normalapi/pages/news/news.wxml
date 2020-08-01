@@ -1,0 +1,20 @@
+<swiper autoplay="true" circular="true">
+	<swiper-item wx:for="{{topList}}" wx:key="index" >
+		<view class="oneItem" bindtap="godetail" data-url="{{item.url}}">
+			<image src="{{item.image}}"></image>
+			<view>{{item.title}}</view>
+		</view>
+	</swiper-item>
+</swiper>
+<view class="select">
+	<text>{{date}}</text>
+	<!-- 日期选择的有效范围 在模拟器上显示不正常 但是只能选择范围内的时间 -->
+	<!-- 日期选择的有效范围 在真机上有用 正常 显示也正常-->
+	<picker mode="date" start="{{start}}" end="{{end}}" bindchange="changeData">
+		<text>选择日期</text>
+	</picker>
+</view>
+<view class="newslist">
+  <onenew wx:for="{{newList}}" wx:key="index" newdata="{{item}}" bindmyevent="getUrl"></onenew>
+</view>
+<view class="changeType" bindtap="changeType">开启无限加载模式</view>

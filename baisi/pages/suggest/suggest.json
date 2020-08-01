@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "oneUp":"../../component/oneUp/oneUp"
+  },
+  "navigationBarTitleText": "推荐"
+}

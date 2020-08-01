@@ -1,0 +1,51 @@
+.myOrder {
+    width: 100%;
+}
+
+.orderItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20rpx;
+    border-bottom: 15rpx solid #ccc;
+    font-size: 30rpx;
+    color: #666;
+}
+
+.orderNo {
+    padding: 15rpx;
+    margin-bottom: 10rpx;
+    border-bottom: 1px solid #ddd;
+}
+
+.orderMessage {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.orderImg {
+    width: 100rpx;
+    height: 100rpx;
+    margin: 15rpx;
+}
+
+.orderNameStatus {
+    width: 68%;
+}
+
+.pay {
+    padding: 15rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.gotopay {
+    width: 150rpx;
+    height: 50rpx;
+    border-radius: 3rpx;
+    background-color: rgb(158, 22, 22);
+    text-align: center;
+    line-height: 50rpx;
+    color: #eee;
+}

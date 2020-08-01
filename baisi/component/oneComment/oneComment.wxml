@@ -1,0 +1,14 @@
+<!--component/oneComment/oneComment.wxml-->
+<view class="oneComment">
+<view class="head">
+		<image src="{{oneComData.user.profile_image}}"></image>
+		<view class="headRight">
+			<view class="name">{{oneComData.user.username}}</view>
+			<view class="time">{{oneComData.ctime}}</view>
+		</view>
+	</view>
+	<view class="body">
+		<view class="title">{{oneComData.content}}</view>
+    <text class="iconfont icon-dianzan">{{oneComData.like_count}}</text>
+	</view>
+</view>

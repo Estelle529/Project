@@ -1,0 +1,7 @@
+<template name="star">
+    <view class="starCon">
+        <block wx:for="{{item.starArr}}" wx:for-item="i">
+            <image src="{{i?'/imgs/icon/star.png':'/imgs/icon/none-star.png'}}" />
+        </block>
+    </view>
+</template>

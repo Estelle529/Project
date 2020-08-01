@@ -1,0 +1,63 @@
+{
+  "pages": [
+    "pages/user/user",
+    "pages/location/location",
+    "pages/menu/menu",
+    "pages/news/news",
+    "pages/newsrefresh/newsrefresh",
+    "pages/newdetail/newdetail",
+    "pages/media/media",
+    "pages/animate/animate",
+    "pages/request/request",
+    "pages/roomdetail/roomdetail",
+    "pages/canvas/canvas",
+    "pages/qrcode/qrcode",
+    "pages/album/album",
+    "pages/camera/camera",
+    "pages/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "backgroundColor": "#eee",
+    "list": [{
+        "pagePath": "pages/menu/menu",
+        "text": "首页",
+        "iconPath": "/imgs/toolbar/home-1.png",
+        "selectedIconPath": "/imgs/toolbar/home.png"
+      },
+      {
+        "pagePath": "pages/media/media",
+        "text": "媒体",
+        "iconPath": "/imgs/toolbar/category-1.png",
+        "selectedIconPath": "/imgs/toolbar/category.png"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "text": "新闻",
+        "iconPath": "/imgs/toolbar/discover-1.png",
+        "selectedIconPath": "/imgs/toolbar/discover.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "/imgs/toolbar/user-1.png",
+        "selectedIconPath": "/imgs/toolbar/user.png"
+      }
+    ],
+    "selectedColor": "#1296db"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "requiredBackgroundModes": ["audio", "location"],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  }
+}

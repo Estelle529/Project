@@ -1,0 +1,20 @@
+<map id="myMap" longitude="{{longitude}}" latitude="{{latitude}}" show-location="{{true}}" markers="{{markers}}" scale="{{scale}}" enable-traffic="{{traffic}}" bindregionchange="userchnage">
+	<cover-view bindtap="gotoCurrent" class="goto">回到当前位置</cover-view>
+	<cover-view class="scale">
+		<button data-type="add" class="sizebutton" bindtap="changeScale">+</button>
+		<button data-type="red" class="sizebutton" bindtap="changeScale">-</button>
+		<cover-view class="hr" style="width:{{scale*25}}rpx"></cover-view>
+		<cover-view class="res">{{scaleRes}}</cover-view>
+	</cover-view>
+	<cover-view class="timeDesc" bindtap="changeDesc">实时路况</cover-view>
+	<cover-view class="searchBox">
+		<cover-view class="searchinput" bindtap="inputFocus">{{inputkey}}</cover-view>
+		<button bindtap="gosearch">搜索</button>
+	</cover-view>
+</map>
+
+<!-- 输入框在真机上不能显示到地图上层 -->
+<!-- 所以我们干脆不看见input -->
+<!-- 在地图上写一个view  点击view  让input获取焦点  然后就可以输入了 -->
+<!-- 输入之后 将输入的内容呈现到view中  就可以看见输入的内容了 -->
+<input focus="{{isfocus}}" bindinput="inputing" style="position:absolute;top:-100rpx"></input>

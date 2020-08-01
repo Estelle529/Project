@@ -1,0 +1,32 @@
+/* pages/home/home.wxss */
+.nav{
+  width: 100vw;
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.navitem{
+  padding: 10rpx;
+}
+.activenav{
+  border-bottom: 2px solid #D4237A;
+}
+.content{
+  margin-top: 15rpx;
+}
+swiper,
+swiper-item,
+scroll-view{
+  width: 100vw;
+  height: calc(100vh - 115rpx);
+}
+
+.musicImg{
+  width: 60rpx;
+  height: 60rpx;
+  position: fixed;
+  top: 100rpx;
+  right: 20rpx;
+  z-index: 100;
+}

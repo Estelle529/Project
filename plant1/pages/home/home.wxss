@@ -1,0 +1,125 @@
+@import "../tpls/base.wxss";
+@import "../tpls/products/products-tpl.wxss";
+@import "../tpls/story/story-tpl.wxss";
+.swiper {
+    width: 100%;
+    height: 400rpx;
+}
+
+.swiper-box {
+    overflow-x: hidden;
+}
+
+.banner-item {
+    height: 100%;
+    width: 100%;
+}
+
+.banner-item image {
+    height: 100%;
+    width: 100%;
+}
+
+.home-main {
+    width: 100%;
+}
+
+.home-main-header {
+    display: flex;
+    height: 60rpx;
+    color: #1296db;
+    font-size: 32rpx;
+    align-items: center;
+    justify-content: center;
+    margin: 20rpx 0;
+}
+
+.moreStory {
+    font-size: 30rpx;
+    margin-left: 350rpx;
+}
+
+.moreStoryImg {
+    width: 50rpx;
+    height: 50rpx;
+    transform: rotate(-90deg);
+}
+
+.changeMis {
+    font-size: 30rpx;
+    margin-left: 350rpx;
+}
+
+.changeMisImg {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.theme-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+.theme-item {
+    display: flex;
+    height: 375rpx;
+    width: 50%;
+    border-bottom: 4rpx solid #fff;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.theme-item:first-child {
+    border-right: 4rpx solid #fff;
+}
+
+.theme-item.big {
+    width: 100%;
+}
+
+.theme-item.big .theme-icon view {
+    margin: 0 auto;
+    width: 150rpx;
+    height: 60rpx;
+    border-radius: 60rpx;
+    line-height: 60rpx;
+    border: 1rpx solid #fff;
+    text-align: center;
+    font-size: 24rpx;
+}
+
+.theme-item image {
+    height: 100%;
+    width: 100%;
+}
+
+.theme-icon {
+    margin-top: 10rpx;
+    height: 48rpx;
+}
+
+.theme-icon image {
+    height: 48rpx;
+    width: 48rpx;
+}
+
+.misCon {
+    display: flex;
+    width: 100%;
+}
+
+.misName {
+    text-align: center;
+    padding: 15rpx;
+    width: 30%;
+    color: #1296db;
+    border-top: 1px dotted #999;
+    border-right: 1px dotted #999;
+}
+
+.misDetail {
+    padding: 15rpx;
+    width: 60%;
+    border-top: 1px dotted #999;
+}

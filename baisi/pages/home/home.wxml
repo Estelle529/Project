@@ -1,0 +1,60 @@
+<!-- 头部的导航 -->
+<view class="nav">
+	<!-- 全部 -->
+	<text class="navitem {{activenav==0?'activenav':''}}"
+  bindtap="gotoSwiper"
+  data-index="0">全 部</text>
+	<!-- 视频 -->
+	<text class="navitem {{activenav==1?'activenav':''}}"
+  bindtap="gotoSwiper"
+  data-index="1">视 频</text>
+	<!-- 图片 -->
+	<text class="navitem {{activenav==2?'activenav':''}}"
+  bindtap="gotoSwiper"
+  data-index="2">图 片</text>
+	<!-- 段子 -->
+	<text class="navitem {{activenav==3?'activenav':''}}"
+  bindtap="gotoSwiper"
+  data-index="3">段 子</text>
+	<!-- 声音 -->
+	<text class="navitem {{activenav==4?'activenav':''}}"
+  bindtap="gotoSwiper"
+  data-index="4">声 音</text>
+</view>
+<!-- 下面的内容 -->
+<view class="content">
+	<image catchtap="changePlay" wx:if="{{showImg}}" src="{{isPlay?'../../image/pause.png':'../../image/play.png'}}" class="musicImg"></image>
+	<!-- 利用轮播图实现 -->
+	<swiper current="{{activenav}}" bindchange="changePage">
+		<!-- 第0页 -->
+		<swiper-item>
+			<scroll-view scroll-y bindscrolltolower="scrollBottom">
+				<oneMessage bindmyId="getId" wx:for="{{data0}}" wx:key="index" oneMessageData="{{item}}" bindmyaudio="getAudio"></oneMessage>
+			</scroll-view>
+		</swiper-item>
+		<!-- 第1页 -->
+		<swiper-item>
+			<scroll-view scroll-y bindscrolltolower="scrollBottom">
+				<oneMessage bindmyId="getId" wx:for="{{data1}}" wx:key="index" oneMessageData="{{item}}"></oneMessage>
+			</scroll-view>
+		</swiper-item>
+		<!-- 第2页 -->
+		<swiper-item>
+			<scroll-view scroll-y bindscrolltolower="scrollBottom">
+				<oneMessage bindmyId="getId" wx:for="{{data2}}" wx:key="index" oneMessageData="{{item}}"></oneMessage>
+			</scroll-view>
+		</swiper-item>
+		<!-- 第3页 -->
+		<swiper-item>
+			<scroll-view scroll-y bindscrolltolower="scrollBottom">
+				<oneMessage bindmyId="getId" wx:for="{{data3}}" wx:key="index" oneMessageData="{{item}}"></oneMessage>
+			</scroll-view>
+		</swiper-item>
+		<!-- 第4页 -->
+		<swiper-item>
+			<scroll-view scroll-y bindscrolltolower="scrollBottom">
+				<oneMessage bindmyId="getId" wx:for="{{data4}}" wx:key="index" oneMessageData="{{item}}" bindmyaudio="getAudio"></oneMessage>
+			</scroll-view>
+		</swiper-item>
+	</swiper>
+</view>

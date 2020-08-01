@@ -1,0 +1,24 @@
+<button class="login" bindgetuserinfo="login" open-type="getUserInfo" wx:if="{{!userInfo.nickName}}">微信一键登录</button>
+<!-- 可以直接获取之后从本地获取 -->
+<view class="user" wx:else>
+	<image src="{{userInfo.avatarUrl}}" class="avatar"></image>
+	<div class="message">
+		<view class="username">{{userInfo.nickName}}</view>
+		<view class="username">{{userInfo.gender==1?'男':'女'}}</view>
+	</div>
+</view>
+
+<!-- 也可以利用open-data获取 -->
+<!-- <view class="user" wx:else>
+	<open-data class="img" type="userAvatarUrl" default-avatar="../../imgs/toolbar/user-1.png"></open-data>
+	<view class="message">
+		<open-data class="name" type="userNickName"></open-data>
+		<open-data class="sex" type="userGender"></open-data>
+	</view>
+</view> -->
+<view>
+<view class="iconfont icon-dianliang">{{electricity}}</view>
+<view class="iconfont icon-lianxiren"></view>
+<view class="iconfont icon-liangdu"><slider value="{{light*100}}"></slider></view>
+<view class="iconfont icon-copy"></view>
+</view>

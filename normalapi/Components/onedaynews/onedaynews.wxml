@@ -1,0 +1,5 @@
+<!--Components/onedaynews/onedaynews.wxml-->
+<view class="oneday">
+	<view class="date">{{onedaydata.date}}</view>
+	<onenew wx:for="{{onedaydata.stories}}" newdata="{{item}}" wx:key="index" bindmyevent="getId"></onenew>
+</view>

@@ -1,0 +1,6 @@
+<!--Components/oneroom/oneroom.wxml-->
+<view class="oneRoom" hover-class="activeRoom" bindtap="sengid">
+		<image src="{{roomdata.roomSrc}}"></image>
+		<view class="roomname">{{roomdata.roomName}}</view>
+		<view class="nickname"><image src="{{roomdata.avatar}}"></image><text>{{roomdata.nickname}}</text><text style="color:red;text-align:right">{{roomdata.hn}}</text></view>
+</view>

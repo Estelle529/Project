@@ -1,0 +1,32 @@
+<view class="oneMessage" bindtap="setStory">
+	<view class="head">
+		<image src="{{oneMessageData.profile_image}}"></image>
+		<view class="headRight">
+			<view class="name">{{oneMessageData.name}}</view>
+			<view class="time">{{oneMessageData.passtime}}</view>
+		</view>
+	</view>
+	<view class="body">
+		<view class="title">{{oneMessageData.text}}</view>
+		<view class="bodyContent">
+			<!-- 图片在图片路径存在并且视频路径不存在时显示 -->
+			<image mode="aspectFit" wx:if="{{oneMessageData.cdn_img && !oneMessageData.videouri}}" src="{{oneMessageData.cdn_img}}" bindtap="viewBig"></image>
+			<!-- video只有在视频资源存在时显示 -->
+			<video wx:if="{{oneMessageData.videouri}}" src="{{oneMessageData.videouri}}"></video>
+			<!-- audio组件不能用只能自己写一个 只有在音频存在的时候才显示 -->
+			<view class="audio" wx:if="{{oneMessageData.voiceuri}}" bindtap="sendAudio">
+				<image src="{{oneMessageData.profile_image}}"></image>
+				<view class="audioRight">
+					<view class="song">未知歌曲</view>
+					<view class="name">{{oneMessageData.name}}</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="foot">
+		<view><text class="iconfont icon-dianzan"></text> {{oneMessageData.love}}</view>
+		<view><text class="iconfont icon-dislike__easy"></text> {{oneMessageData.hate}}</view>
+		<view><button class="iconfont icon-fenxiang" open-type="share"></button> {{oneMessageData.repost}}</view>
+		<view bindtap="sendId"><text class="iconfont icon-comment"></text> {{oneMessageData.comment}}</view>
+	</view>
+</view>

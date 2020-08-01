@@ -1,0 +1,17 @@
+/* pages/canvas/canvas.wxss */
+#myCanvas{
+  width: 350px;
+  height: 200px;
+  background-color: lightgray;
+  margin: 0 auto;
+}
+button{
+  width: 600rpx !important;
+  background-color: lightskyblue;
+  margin: 10rpx auto;
+}
+slider{
+  display: block;
+  width: 600rpx;
+  margin: 30rpx auto;
+}

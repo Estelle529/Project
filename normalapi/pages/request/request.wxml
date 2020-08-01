@@ -1,0 +1,4 @@
+<view class="headtitle">斗鱼房间列表</view>
+<view class="Container">
+	<oneroom  wx:for="{{list}}" wx:key="index" roomdata="{{item}}" bindmyevent="getid"></oneroom>
+</view>

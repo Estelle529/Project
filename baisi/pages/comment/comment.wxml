@@ -1,0 +1,12 @@
+<view class="container">
+	<view class="hot">
+		<view wx:if="{{hot.length > 0}}" style="text-align:center">热门评论</view>
+		<oneComment wx:for="{{hot}}" wx:key="index" oneComData="{{item}}"></oneComment>
+		<view wx:if="{{hot.length == 0}}" style="padding:15rpx">暂无热门评论</view>
+	</view>
+	<view class="com">
+		<view wx:if="{{com.length > 0}}" style="text-align:center">全部评论</view>
+		<oneComment wx:for="{{com}}" wx:key="index" oneComData="{{item}}"></oneComment>
+		<view wx:if="{{com.length == 0}}" style="padding:15rpx">暂无评论</view>
+	</view>
+</view>

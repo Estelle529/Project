@@ -1,0 +1,34 @@
+/* Components/oneroom/oneroom.wxss */
+.oneRoom{
+  width: 350rpx;
+  margin-bottom: 30rpx;
+}
+.activeRoom{
+  opacity: 0.5;
+}
+.oneRoom image{
+  width: 350rpx;
+  height: 240rpx;
+}
+.roomname{
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.nickname{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.nickname image{
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+}
+.nickname text{
+  width: 40%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

@@ -1,0 +1,27 @@
+/* pages/user/user.wxss */
+
+.login {
+  width: 600rpx !important;
+  background-color: skyblue;
+  color: #eee;
+  margin: 10rpx auto;
+}
+
+.user {
+  display: flex;
+  height: 180rpx;
+  align-items: center;
+  border-bottom: 1px solid;
+}
+
+.user image {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  margin-left: 20rpx;
+}
+.user .message {
+  padding-left: 20rpx;
+  width: 60%;
+  font-size:50rpx;
+}

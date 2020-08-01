@@ -1,0 +1,8 @@
+<!--pages/animate/animate.wxml-->
+<view animation="{{myAnimate}}"></view>
+<button bindtap="setAnimate">执行动画</button>
+<view class="buyTicket">
+<text class="zhengzhou" animation="{{flag?right:left}}">郑州</text>
+<image src="../../public/change.jpg" bindtap="changeAnimate" animation="{{rot}}"></image>
+<text class="shanghai" animation="{{flag?left:right}}">上海</text>
+</view>

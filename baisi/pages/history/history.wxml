@@ -1,0 +1,2 @@
+	<image catchtap="changePlay" wx:if="{{showImg}}" src="{{isPlay?'../../image/pause.png':'../../image/play.png'}}" class="musicImg"></image>
+<oneMessage bindmyId="getId" wx:for="{{history}}" wx:key="index" oneMessageData="{{item}}" bindmyaudio="getAudio"></oneMessage>

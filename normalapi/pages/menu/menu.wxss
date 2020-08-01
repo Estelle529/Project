@@ -1,0 +1,6 @@
+/* pages/menu/menu.wxss */
+button{
+  background-color: seagreen;
+  color: #eee;
+  margin: 20rpx auto;
+}

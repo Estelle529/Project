@@ -1,0 +1,31 @@
+<button bindtap="playbgmusic">播放背景音乐</button>
+<button bindtap="pausebgmusic">暂停背景音乐</button>
+<button bindtap="playmusic">播放音乐</button>
+<button bindtap="pausemusic">暂停音乐</button>
+调节音量<slider bindchanging="changeVolume" min="0" max="1" step="0.01" value="1"></slider>
+
+<view class="recordControl" bindtouchstart="beginRecord" bindtouchend="endRecord" style="background:{{recordBgcolor}}">{{recordMessage}}{{filter(time)}}</view>
+<view wx:for="{{recordList}}" wx:key="index" data-src="{{item.tempFilePath}}" style="width:{{150+item.duration*40}}rpx" class="onerecord" bindtap="playRecord">
+	{{item.duration}}
+</view>
+
+<video id="myVideo" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" controls danmu-btn enable-danmu danmu-list="{{danmuList}}"></video>
+
+<input placeholder="输入弹幕信息" bindinput="getMessage" value="{{danmumessage}}"></input>
+
+<button bindtap="sendDanmu">发送弹幕</button>
+
+<view>{{student.name}}</view>
+
+<!-- 在wxml中添加wxs模块 -->
+<wxs module="student">
+	//在wxs标签中写的是weixin script语法
+	var name = "张三";
+  //导出数据
+  module.exports = {
+    name:name,
+    age:20
+  }
+</wxs>
+
+<wxs module="filter" src="./media.wxs"></wxs>

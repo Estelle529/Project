@@ -1,0 +1,89 @@
+/* pages/user/user.wxss */
+@import '../../utils/iconfont.wxss';
+@font-face {
+  font-family: 'iconfont';  /* project id 1971970 */
+  src: url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.eot');
+  src: url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.svg#iconfont') format('svg');
+}
+page{
+  background-color: #eee;
+}
+.userHead {
+  display: flex;
+  justify-content: space-around;
+  height: 180rpx;
+  background-color: #D4237A;
+  align-items: center;
+  color:#eee
+}
+
+.userHead image {
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+}
+
+.userHead .name {
+  width: 50%;
+  font-size: 33rpx;
+}
+.userHead .detail{
+  width: 145rpx;
+}
+.detailMessage{
+  position: fixed;
+  width: 100vw;
+  left: 0;
+  top: 181rpx;
+  height: 170rpx;
+  padding: 30rpx;
+  background-color: #D4237A;
+}
+.detailMessage view{
+  font-size: 35rpx;
+  margin-bottom: 10rpx;
+}
+.nologin .iconfont{
+  font-size: 50rpx;
+}
+.nologin button{
+  margin: 0;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  width: 100vw !important;
+  text-align: left;
+  font-size: 40rpx;
+  color: #999;
+}
+.nologin view{
+  padding: 20rpx;
+  display: block;
+  font-size: 40rpx;
+  color: #999;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+.right{
+  float: right;
+}
+.userItem{
+  display: flex;
+  padding: 15rpx;
+  align-items: center;
+  height: 100rpx;
+  font-size: 33rpx;
+  margin-top: 15rpx;
+  background-color: #ddd;
+}
+.rightArrow{
+  margin-left: 450rpx;
+}
+.userItem image{
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 15rpx;
+}

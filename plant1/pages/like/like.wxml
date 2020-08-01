@@ -1,0 +1,13 @@
+<view class="container">
+    <view class="noLike" wx:if="{{noLike}}">您还没有添加收藏</view>
+    <block wx:for="{{likePlants}}">
+        <view class="likeItem" data-id="{{item.id}}" bindtap = "onProductTap">
+            <image src="{{item.main_img_url}}" alt="" /> 
+            <view class="message">
+                <view class="name">{{item.name}}</view>
+                <view class="language">{{item.flower_language}}</view>
+            </view>
+            <icon class="cancel" size="30" catchtap="cancelLike" type="cancel" data-index="{{index}}" data-id="{{item.id}}"/>
+        </view>
+    </block>
+</view>

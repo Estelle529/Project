@@ -1,0 +1,18 @@
+.icon {
+    width: 400rpx;
+    height: 400rpx;
+    border-radius: 10rpx;
+    background-color: #eee;
+    margin: 100rpx auto 30rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.goBack {
+    width: 400rpx;
+    height: 70rpx;
+    margin: 0 auto;
+    line-height: 70rpx;
+}

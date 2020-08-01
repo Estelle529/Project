@@ -1,0 +1,44 @@
+/* pages/flowerLanguage/flowerLanguage.wxss */
+
+.content {
+    width: 95%;
+    padding: 10rpx 25rpx;
+}
+
+.flowerName {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #666;
+}
+
+image {
+    width: 35px;
+    height: 35px;
+    transform: rotate(-90deg);
+}
+
+.languageItem {
+    width: 100%;
+    min-height: 130rpx;
+    display: flex;
+    align-items: center;
+}
+
+.languageItem .itemName {
+    width: 30%;
+    text-align: center;
+    margin-right: 5rpx;
+}
+
+.languageItem .itemDetail {
+    padding: 5rpx 0;
+    width: 65%;
+    text-align: left;
+    margin-left: 5rpx;
+}
+
+.flowerDetail .languageItem:nth-child(2n) {
+    background-color: rgb(60, 216, 236);
+}

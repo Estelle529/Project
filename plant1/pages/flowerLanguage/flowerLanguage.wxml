@@ -1,0 +1,213 @@
+<view class="container">
+    <view class="title">这些花语你都知道吗</view>
+    <view class="content">
+        <view class="flowerName" data-index="1" data-flower="玫瑰花" bindtap="changeFlower">
+            <text>玫瑰花</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==1?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 1}}">
+            <block wx:for="{{language1}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="2" data-flower="康乃馨" bindtap="changeFlower">
+            <text>康乃馨</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==2?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 2}}">
+            <block wx:for="{{language2}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="3" data-flower="郁金香" bindtap="changeFlower">
+            <text>郁金香</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==3?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 3}}">
+            <block wx:for="{{language3}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="4" data-flower="鸢尾" bindtap="changeFlower">
+            <text>鸢尾</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==4?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 4}}">
+            <block wx:for="{{language4}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="5" data-flower="水仙花" bindtap="changeFlower">
+            <text>水仙花</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==5?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 5}}">
+            <block wx:for="{{language5}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="6" data-flower="山茶花" bindtap="changeFlower">
+            <text>山茶花</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==6?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 6}}">
+            <block wx:for="{{language6}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="7" data-flower="菊花" bindtap="changeFlower">
+            <text>菊花</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==7?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 7}}">
+            <block wx:for="{{language7}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="8" data-flower="风信子" bindtap="changeFlower">
+            <text>风信子</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==8?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 8}}">
+            <block wx:for="{{language8}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="9" data-flower="石竹花" bindtap="changeFlower">
+            <text>石竹花</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==9?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 9}}">
+            <block wx:for="{{language9}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="10" data-flower="百合" bindtap="changeFlower">
+            <text>百合</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==10?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 10}}">
+            <block wx:for="{{language10}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="11" data-flower="曼陀罗" bindtap="changeFlower">
+            <text>曼陀罗</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==11?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 11}}">
+            <block wx:for="{{language11}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="12" data-flower="百日草" bindtap="changeFlower">
+            <text>百日草</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==12?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 12}}">
+            <block wx:for="{{language12}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="13" data-flower="兰花" bindtap="changeFlower">
+            <text>兰花</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==13?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 13}}">
+            <block wx:for="{{language13}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="14" data-flower="蝴蝶兰" bindtap="changeFlower">
+            <text>蝴蝶兰</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==14?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 14}}">
+            <block wx:for="{{language14}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="15" data-flower="海棠花" bindtap="changeFlower">
+            <text>海棠花</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==15?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 15}}">
+            <block wx:for="{{language15}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+        <view class="flowerName" data-index="16" data-flower="其他" bindtap="changeFlower">
+            <text>其他</text>
+            <image src="../../imgs/icon/arrow@right.png" animation="{{currentIndex==16?down:right}}"/>
+        </view>
+        <view class="flowerDetail" hidden="{{currentIndex != 16}}">
+            <block wx:for="{{language16}}">
+                <view class="languageItem">
+                    <text class="itemName">{{item.name_detail}}</text>
+                     : 
+                    <text class="itemDetail">{{item.language}}</text>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,55 @@
+/* pages/camera/camera.wxss */
+button{
+  width: 600rpx !important;
+  margin: 50rpx auto;
+}
+camera{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+camera cover-view{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+camera .closeCam{
+  bottom:20rpx;
+  width: 500rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: rgb(102, 172, 238);
+  text-align: center;
+  color: #eee;
+  border-radius: 10rpx;
+}
+
+camera .getImg{
+  width: 150rpx;
+  height: 150rpx;
+  bottom: 150rpx;
+  border-radius: 50%;
+  background-color: #eee;
+  opacity: 0.8;
+  border: 5px solid red;
+}
+
+
+camera cover-image{
+  position: absolute;
+  width: 100rpx;
+  height:100rpx;
+  bottom: 175rpx;
+  right: 100rpx;
+  border-radius: 50%;
+}
+
+image{
+  display: block;
+  width: 600rpx;
+  height: 600rpx;
+  margin: 50rpx auto 0;
+}

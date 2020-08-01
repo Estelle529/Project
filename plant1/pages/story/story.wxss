@@ -1,0 +1,30 @@
+/* pages/story/story.wxss */
+
+@import "../../utils/iconfont.wxss";
+.head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.name {
+    font-size: 40rpx;
+}
+
+image {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 30%;
+}
+
+.story {
+    padding: 15rpx;
+}
+
+.p {
+    font-size: 35rpx;
+    line-height: 50rpx;
+    margin-bottom: 13rpx;
+    text-indent: 50rpx;
+    text-align: left;
+}

@@ -1,0 +1,7 @@
+<!--pages/qrcode/qrcode.wxml-->
+<input placeholder="请输入二维码信息" bindinput="setMessage"></input>
+<button bindtap="getQrcode">生成二维码</button>
+<button bindtap="scanQrcode">扫描二维码</button>
+
+<!-- 绘制二维码的canvas -->
+<canvas canvas-id="myCanvas" bindlongpress="saveImg" ></canvas>

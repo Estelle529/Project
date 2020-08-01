@@ -1,0 +1,9 @@
+/* pages/story/story.wxss */
+.musicImg{
+  width: 60rpx;
+  height: 60rpx;
+  position: fixed;
+  top: 100rpx;
+  right: 20rpx;
+  z-index: 100;
+}

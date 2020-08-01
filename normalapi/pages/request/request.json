@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "oneroom": "../../Components/oneroom/oneroom"
+  },
+  "navigationBarTitleText": "请求数据",
+  "enablePullDownRefresh":true,
+  "backgroundColor":"#fff",
+  "backgroundTextStyle":"dark"
+}

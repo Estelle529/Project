@@ -1,0 +1,14 @@
+<!--pages/camera/camera.wxml-->
+<button type="primary" bindtap="submit">
+  上传头像
+</button>
+<!-- 生物认证 -->
+<button type="warn" bindtap="soter">生物认证</button>
+
+
+<camera wx:if="{{isshowcamera}}" device-position="{{direction}}">
+<cover-view class="getImg" bindtap="getImg"></cover-view>
+  <cover-image src="http://www.xz7.com/up/2015-1/20151109302.jpg" bindtap="changeDirection"></cover-image>
+</camera>
+
+<image mode="widthFix" src="{{imgUrl}}" wx:if="{{showImg}}" bindlongpress="saveImg"></image>

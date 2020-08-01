@@ -1,0 +1,32 @@
+/* pages/newsrefresh/newsrefresh.wxss */
+swiper{
+  position: fixed;
+  top: 0;
+}
+swiper, swiper-item{
+  width: 100vw;
+  height: 460rpx;
+}
+swiper-item image{
+  width: 100vw;
+  height: 460rpx;
+}
+.oneItem{
+  position: relative;
+}
+.oneItem view{
+  position: absolute;
+  width: 100vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  bottom: 0;
+  padding: 15rpx 0;
+  font-size: 40rpx;
+  color: #eee;
+  background-color: rgba(0, 0, 0,0.5);
+  text-indent: 30rpx;
+}
+.content{
+  margin-top: 460rpx;
+}

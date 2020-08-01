@@ -1,0 +1,123 @@
+<view class="container">
+    <view class="head">
+        <image class="headImg" src="{{product.main_img_url}}" mode="aspectFill" />
+        <view class="headImg-hover">
+            <view class="properties">
+                <view class="flowerStar">
+                    <text class="name">{{product.name}}</text>
+                    <view class="starCon">
+                        <block wx:for="{{starArr}}" wx:for-item="i">
+                            <image src="{{i?'/imgs/icon/star.png':'/imgs/icon/none-star.png'}}" />
+                        </block>
+                    </view>
+                </view>
+                <view class="flowerLanguage">{{product.flower_language}}</view>
+            </view>
+            <image class="floatImg" src="{{product.main_img_url}}" data-src="{{product.main_img_url}}" catchtap="viewPostImg"/>
+            <image class="collect" src="{{collect?'/imgs/icon/collection.png':'/imgs/icon/collection-anti.png'}}" catchtap="setCollection" />
+        </view>
+        <view class="fixed-btns-box" bindtap="onCartTap">
+            <image src="../../imgs/icon/cart@top.png" animation="{{animationData}}"></image>
+            <view wx:if="{{cartTotalCounts>0}}" animation="{{animationData}}">
+                {{cartTotalCounts}}
+            </view>
+        </view>
+    </view>
+    <view class="content">
+        <scroll-view scroll-y="{{true}}" class="vertical">
+            <view class="contentCon basicMessage">
+                <view class="leftTop">
+                    <icon class="iconfont iconbasic-information"></icon>
+                    基本信息
+                </view>
+                <block wx:for="{{product.detail_property}}">
+                    <view class="basicDetail">
+                        <text>{{item.name}}</text>
+                        :
+                        <text>{{item.detail}}</text>
+                    </view>
+                </block>
+            </view>
+            <view class="long"></view>
+            <view class="contentCon mainImg">
+                <view class="leftTop">
+                    <icon class="iconfont icontupian"></icon>
+                    精品图片
+                </view>
+                <swiper indicator-dots="true" autoplay="true" class="swiper">
+                    <block wx:for="{{product.detail_imgs}}">
+                        <swiper-item class="banner-item" data-src="{{item.detailimg_url.url}}" catchtap="viewPostImg">
+                            <image src="{{item.detailimg_url.url}}" alt="" mode="aspectFill" />
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </view>
+            <view class="long"></view>
+            <view class="contentCon Breeding">
+                <view class="leftTop">
+                    <icon class="iconfont iconzhiwu"></icon>
+                    养殖技巧
+                </view>
+                <scroll-view scroll-x="{{true}}" class="breedName">
+                    <block wx:for="{{product.detail_breeding}}">
+                        <view class="name-item {{index==currentTabsIndex?'selected':''}}" bindtap="onTabsItemTap" data-index="{{index}}">
+                            {{item.name}}
+                        </view>
+                    </block>
+                </scroll-view>
+                <view class="breedDetail">
+                    <block wx:for="{{product.detail_breeding}}">
+                        <view class="detailItem" hidden="{{index!=currentTabsIndex}}">
+                            {{item.detail}}
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="long"></view>
+            <view class="contentCon pest">
+                <view class="leftTop">
+                    <icon class="iconfont iconchongzi"></icon>
+                    可能病虫害
+                </view>
+                <block wx:for="{{product.detail_pest}}">
+                    <view class="pestDetail">
+                        <text>{{item.name}}</text>
+                        :
+                        <text>{{item.detail}}</text>
+                    </view>
+                </block>
+            </view>
+            <view class="long"></view>
+            <view class="contentCon worth">
+                <view class="leftTop">
+                    <icon class="iconfont iconjiazhi"></icon>
+                    存在价值
+                </view>
+                <view class="worthName">
+                    <block wx:for="{{product.detail_worth}}">
+                        <view class="worthNameItem" data-index="{{index}}" bindtap="onViewDetail">
+                            <text>{{item.name}}</text>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="foot">
+        <view class="product-counts">
+            <picker class="{{product.stock==0?'disabled':''}}" bindchange="bindPickerChange" value="{{index}}" range="{{countsArray}}">
+                <!-- 因为picker对flex支持不好，所以加了一层view -->
+                <view>
+                    <text class="counts-tips">数量</text>
+                    <text class="counts-data">{{productCounts}}</text>
+                    <image class="counts-icon" src="../../imgs/icon/arrow@down.png"></image>
+                </view>
+            </picker>
+        </view>
+        <view class="middle-border"></view>
+        <view class="add-cart-btn {{product.stock==0?'disabled':''}}" bindtap="onAddingToCartTap">
+            <text>加入购物车</text>
+            <image class="cart-icon" src="../../imgs/icon/cart.png"></image>
+        </view>
+    </view>
+</view>

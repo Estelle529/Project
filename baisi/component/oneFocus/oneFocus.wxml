@@ -1,0 +1,11 @@
+<!--component/oneFocus/oneFocus.wxml-->
+<view class="onefocus" bindlongpress="showCancel">
+	<image src="{{onefocusdata.header}}" class="head"></image>
+	<view class="message">
+		<image class="gender" src="{{v.gender==1?'../../image/man.png':'../../image/women.png'}}"></image>
+		<text class="name">{{onefocusdata.screen_name}}</text>
+		<text class="fans">粉丝数 ：{{onefocusdata.fans_count}}</text>
+		<image class="vip" src="{{onefocusdata.is_vip?'../../image/vip.png':'../../image/novip.png'}}"></image>
+	</view>
+	<view data-id="{{onefocusdata.uid}}" class="cancelFocus" wx:if="{{cancel}}" catchtap="cancelFocus">取消关注</view>
+</view>

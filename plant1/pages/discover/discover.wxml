@@ -1,0 +1,34 @@
+<view class="container">
+    <view class="searchBox">
+        <view class="inputBox">
+            <input class="text" placeholder="输入关键字" placeholder-style="color:#666" maxlength="10" bindblur="getValue" bindfocus="focusTap" value="{{inputValue}}" data-name="{{}}" />
+            <image hidden="{{!isSearch}}" src="../../imgs/icon/cancel.png" catchtap="cancelTap" />
+        </view>
+        <view class="search {{isSearch?'isSearch':''}}" bindtap="searchTap">找一找</view>
+    </view>
+    <view class="keysCon" wx:if="{{!isSearch}}">
+        <view class="title">搜索热词</view>
+        <view class="hotKeys">
+            <text class="key" bindtap="hotSearch" data-text="爱情">爱情</text>
+            <text class="key" bindtap="hotSearch" data-text="怀念">怀念</text>
+            <text class="key" bindtap="hotSearch" data-text="开花">开花</text>
+            <text class="key" bindtap="hotSearch" data-text="中国">中国</text>
+            <text class="key" bindtap="hotSearch" data-text="高雅">高雅</text>
+        </view>
+    </view>
+    <view wx:if="{{isSearch}}" class="searchCon">
+        <view class="serchRes" wx:if="{{isHavaRes}}">
+            <view class="searchCount">共找到{{searchCount}}条结果</view>
+            <block wx:for="{{plantsMes}}">
+                <view class="plantItem" data-id="{{item.id}}" bindtap="onProductTap">
+                    <image src="{{item.main_img_url}}" alt="" />
+                    <view class="message">
+                        <view class="name">{{item.name}}</view>
+                        <view class="language">{{item.flower_language}}</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="noRes" wx:if="{{!isHavaRes}}">啥 都 没 找 着</view>
+    </view>
+</view>

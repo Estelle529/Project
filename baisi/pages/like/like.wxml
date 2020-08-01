@@ -1,0 +1,21 @@
+<view wx:if="{{!islogin}}" class="noLogin">
+	<image src="http://pic.qqtn.com/up/2016-7/2016071115340991662.gif"></image>
+	<view>快快登陆吧，关注百思里最in牛人</view>
+	<view>好友动态让你过把瘾~</view>
+	<view>点击可查看大佬动态，欧耶~~~</view>
+	<view>长按取消关注</view>
+	<button open-type="getUserInfo" bindgetuserinfo="getInfo">立即登录/注册</button>
+</view>
+<view class="hasLogin" wx:else>
+	<oneFocus wx:for="{{focusList}}" wx:key="index" onefocusdata="{{item}}" bindsendId="realyCancel"></oneFocus>
+	<view wx:if="{{focusList.length == 0}}" class="nothing">真懒，什么都没有关注</view>
+	<!-- 显示推荐关注的用户 -->
+	<view class="specialSuggest" bindtap="refresh">
+		<view class="suggestTitle">推荐关注</view>
+		<swiper autoplay="{{true}}" circular="{{true}}" vertical="{{true}}">
+			<swiper-item wx:for="{{specialSuggest}}" wx:key="index">
+				<oneUp oneUpdata="{{item}}"></oneUp>
+			</swiper-item>
+		</swiper>
+	</view>
+</view>

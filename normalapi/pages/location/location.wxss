@@ -1,0 +1,72 @@
+/* pages/location/location.wxss */
+map {
+  width: 100vw;
+  height: 100vh;
+}
+
+.goto {
+  width: 100rpx;
+  height: 100rpx;
+  padding: 10rpx;
+  white-space: pre-wrap;
+  position: fixed;
+  bottom: 60rpx;
+  right: 30rpx;
+  background-color: red;
+  border-radius: 20rpx;
+  color: #eee;
+}
+
+.scale {
+  position: fixed;
+  left: 30rpx;
+  bottom: 30rpx;
+  width: 500rpx;
+  height: 300rpx;
+}
+
+.sizebutton {
+  width: 100% !important;
+  background-color: royalblue;
+  margin-bottom: 20rpx;
+  color: #eee;
+}
+
+.hr {
+  height: 20rpx;
+  background-color: red;
+}
+
+.res {
+  text-align: center;
+}
+
+.timeDesc {
+  width: 100rpx;
+  height: 100rpx;
+  padding: 10rpx;
+  white-space: pre-wrap;
+  position: fixed;
+  bottom: 210rpx;
+  right: 30rpx;
+  background-color: red;
+  border-radius: 20rpx;
+  color: #eee;
+}
+
+.searchBox {
+  width: 700rpx;
+  display: flex;
+  position: fixed;
+  top: 20rpx;
+  left: 25rpx;
+}
+
+.searchinput {
+  padding-left: 15rpx;
+  width: 650rpx;
+  height: 75rpx;
+  background-color: #fff;
+  border: 1px solid;
+  line-height: 75rpx;
+}

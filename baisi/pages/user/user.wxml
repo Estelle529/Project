@@ -1,0 +1,38 @@
+<view class="nologin" wx:if="{{!islogin}}">
+	<button open-type="getUserInfo" bindgetuserinfo="getInfo">
+		<text class="iconfont icon-user"></text>
+		<text>登陆/注册</text>
+		<text class="right">></text>
+	</button>
+	<view>
+		<text>离线下载</text>
+		<text class="right">></text>
+	</view>
+</view>
+<view wx:else class="hasLogin">
+	<view class="userHead">
+		<image src="{{userInfo.avatarUrl}}"></image>
+		<view class="name">{{userInfo.nickName}}</view>
+		<view class="detail" bindtap="getDetail">{{detail?'关闭x':'查看详情>'}}</view>
+		<view class="detailMessage" animation="{{detail?show:hide}}">
+			<view><text>姓名 : </text><text>{{userInfo.nickName}}</text></view>
+			<view><text>性别 : </text><text>{{userInfo.gender==1?'男':'女'}}</text></view>
+			<view><text>地区 : </text><text>{{userInfo.country}}-{{userInfo.province}}</text></view>
+		</view>
+	</view>
+	<view class=" userItem activeSpace" bindtap="gotoSpace">
+		<image src="../../image/space.png"></image>
+		<text>空间动态</text>
+		<text class="rightArrow"> > </text>
+	</view>
+	<view class=" userItem story" bindtap="gotoHistory">
+		<image src="../../image/history.png"></image>
+		<text>浏览历史</text>
+		<text class="rightArrow"> > </text>
+	</view>
+	<view class=" userItem focus" bindtap="gotoFocus">
+		<image src="../../image/focus.png"></image>
+		<text>我的关注</text>
+		<text class="rightArrow"> > </text>
+	</view>
+</view>

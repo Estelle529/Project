@@ -1,0 +1,17 @@
+<view class="container">
+	<view class="left">
+		<view class="catItem {{index==currentIndex?'currCat':''}}" wx:for="{{allcat}}" wx:key="index" bindtap="changeCat" data-index="{{index}}">
+			{{item.name}}
+		</view>
+	</view>
+	<view class="right">
+		<scroll-view class="rightItem" bindscrolltolower="getBottom" wx:if="{{isLogin}}" scroll-y="{{true}}">
+			<!-- 登录就显示处理过 -->
+			<oneUp wx:for="{{resList}}" oneUpdata="{{item}}" wx:key="index"></oneUp>
+		</scroll-view>
+		<scroll-view class="rightItem" bindscrolltolower="getBottom" wx:else scroll-y="{{true}}">
+			<!-- 没有登录就显示没有处理的 -->
+			<oneUp wx:for="{{upList}}" oneUpdata="{{item}}" wx:key="index"></oneUp>
+		</scroll-view>
+	</view>
+</view>

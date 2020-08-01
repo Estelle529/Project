@@ -1,0 +1,12 @@
+//在这个wxs文件中实现一个数字过滤器并导出
+function filter(num){
+  // 3   3.5
+  if(num%1 == 0){
+    return num + ".0";
+  }else{
+    return num;
+  }
+  
+}
+
+module.exports = filter

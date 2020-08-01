@@ -1,0 +1,8 @@
+<!--Components/onenew.wxml-->
+<view class="onenew" bindtap="sendUrl">
+	<image src="{{newdata.images[0]}}"></image>
+	<view class="right">
+		<view class="right-title">{{newdata.title}}</view>
+		<view class="right-create">{{newdata.hint}}</view>
+	</view>
+</view>

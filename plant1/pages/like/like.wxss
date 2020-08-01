@@ -1,0 +1,41 @@
+.noLike {
+    margin: 200rpx auto 0;
+    color: #666;
+}
+
+.likeItem {
+    width: 100%;
+    display: flex;
+    padding: 10rpx;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 5px solid rgb(221, 216, 216);
+}
+
+image {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+}
+
+.message {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.name,
+.language {
+    width: 100%;
+    font-size: 30rpx;
+}
+
+.language {
+    line-height: 40rpx;
+    height: 40rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: rgb(221, 235, 29);
+}

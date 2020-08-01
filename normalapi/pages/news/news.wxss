@@ -1,0 +1,51 @@
+/* pages/news/news.wxss */
+swiper{
+  position: fixed;
+  top: 0;
+}
+swiper, swiper-item{
+  width: 100vw;
+  height: 460rpx;
+}
+swiper-item image{
+  width: 100vw;
+  height: 460rpx;
+}
+.oneItem{
+  position: relative;
+}
+.oneItem view{
+  position: absolute;
+  width: 100vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  bottom: 0;
+  padding: 15rpx 0;
+  font-size: 40rpx;
+  color: #eee;
+  background-color: rgba(0, 0, 0,0.5);
+  text-indent: 30rpx;
+}
+.select{
+  width: 100vw;
+  height: 100rpx;
+  background-color: rgb(54, 147, 184);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #eee;
+  position: fixed;
+  top: 460rpx;
+}
+.newslist{
+  margin-top: 560rpx;
+}
+.changeType{
+  position: fixed;
+  top: 20rpx;
+  right: 20rpx;
+  background-color: #eee;
+  padding: 10rpx;
+  border-radius: 10rpx;
+}

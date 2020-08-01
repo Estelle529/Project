@@ -1,0 +1,10 @@
+ <scroll-view class="scroll-view_H" scroll-Y style="height: 100vh" 
+ scroll-into-view="{{toView}}"
+ scroll-with-animation = "true"
+ bindtouchstart="onTouchstart" 
+ bindtouchend="onTouchend" >
+    <view id="green"  class="scroll-view-item_H bc_green">第一页</view>
+    <view id="red"    class="scroll-view-item_H bc_red">第二页</view>
+    <view id="yellow" class="scroll-view-item_H bc_yellow">第三页</view>
+    <view id="blue"   class="scroll-view-item_H bc_blue">第四页</view>
+  </scroll-view>

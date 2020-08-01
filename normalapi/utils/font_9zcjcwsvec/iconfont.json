@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "3729191",
+      "name": "电量",
+      "font_class": "dianliang",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "11488013",
+      "name": "copy",
+      "font_class": "copy",
+      "unicode": "e74a",
+      "unicode_decimal": 59210
+    },
+    {
+      "icon_id": "13646871",
+      "name": "联系人",
+      "font_class": "lianxiren",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "14997316",
+      "name": "亮度",
+      "font_class": "liangdu",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    }
+  ]
+}

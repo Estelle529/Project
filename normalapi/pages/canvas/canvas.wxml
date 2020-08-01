@@ -1,0 +1,23 @@
+<!--pages/canvas/canvas.wxml-->
+<text>canvas绘图</text>
+<button bindtap="drawLine">画线段</button>
+<button bindtap="drawcircular">画圆</button>
+<button bindtap="drawQuadrilateral">画四边形</button>
+<button bindtap="drawTriangle">画三角形</button>
+<button bindtap="drawArc">画弧线</button>
+<button bindtap="drawText">画文字</button>
+<button bindtap="drawImg">画图片</button>
+<button bindtap="drawTest">验证码</button>
+<button bindtap="drawBsr">贝塞尔曲线</button>
+<slider min="10" max="50" bindchanging="changeOne"></slider>
+<slider min="40" max="130" bindchanging="changeTwo"></slider>
+<slider min="100" max="160" bindchanging="changeThree"></slider>
+<button bindtap="drawPolygon">超级多边形</button>
+<slider min="3" max="15" bindchanging="changeCount"></slider>
+
+
+
+
+
+
+<canvas type="2d" id="myCanvas"></canvas>

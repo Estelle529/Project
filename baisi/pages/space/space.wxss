@@ -1,0 +1,24 @@
+/* pages/space/space.wxss */
+.nav{
+  display: flex;
+  height: 100rpx;
+  justify-content: space-around;
+}
+.focus, .hot{
+  width: 45%;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 35rpx;
+}
+.active{
+  border-bottom: 2px solid #D4237A;
+}
+.musicImg{
+  width: 60rpx;
+  height: 60rpx;
+  position: fixed;
+  top: 100rpx;
+  right: 20rpx;
+  z-index: 100;
+}

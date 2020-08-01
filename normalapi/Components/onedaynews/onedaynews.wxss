@@ -1,0 +1,9 @@
+/* Components/onedaynews/onedaynews.wxss */
+.oneday .date{
+  width: 100%;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  background-color: #3693B8;
+  color: #eee;
+}

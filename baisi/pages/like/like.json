@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "oneFocus":"../../component/oneFocus/oneFocus",
+    "oneUp":"../../component/oneUp/oneUp"
+  },
+  "navigationBarTitleText": "收藏"
+}

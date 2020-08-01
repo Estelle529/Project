@@ -1,0 +1,14 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 点击登录 </button>
+    <block wx:else>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">欢迎 {{userInfo.nickName}} 访问室内植物养殖助手</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <view wx:if="{{!hasUserInfo && canIUse}}" class="user-motto" disabled="{{true}}">未登录，请先登录</view>
+    <button wx:else class="user-motto" bindtap="bindViewTap" type="default">已登录，点击浏览</button>
+  </view>
+</view>

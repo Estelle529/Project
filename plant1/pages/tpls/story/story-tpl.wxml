@@ -1,0 +1,13 @@
+<template name="story">
+    <view class="story-box">
+        <block wx:for="{{plantsStory}}">
+            <view class="story-item" bindtap="onDetailStory" data-id="{{item.id}}">
+                <image class="story-image" src="{{item.image.url}}" mode="aspectFill"></image>
+                <view class="story-item-detail">
+                    <text class="name">{{item.name}}</text>
+                    <view class="detail">{{item.paragraph1}}</view>
+                </view>
+            </view>
+        </block>
+    </view>
+</template>

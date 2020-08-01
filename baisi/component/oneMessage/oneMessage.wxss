@@ -1,0 +1,109 @@
+/* component/oneMessage/oneMessage.wxss */
+@import '../../utils/iconfont.wxss';
+
+@font-face {
+  font-family: 'iconfont';
+  /* project id 1971970 */
+  src: url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.eot');
+  src: url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.svg#iconfont') format('svg');
+}
+
+.oneMessage {
+  padding: 15rpx;
+  /* background-color: #eee; */
+  margin-bottom: 20rpx;
+}
+
+.head {
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+}
+
+.head image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.headRight {
+  margin-left: 10rpx;
+}
+
+.headRight .name {
+  font-size: 30rpx;
+  margin-bottom: 5rpx;
+}
+
+.headRight .time {
+  font-size: 25rpx;
+}
+
+.body {
+  margin-top: 5rpx;
+}
+
+.body .title {
+  line-height: 50rpx;
+  color: #333;
+}
+
+.body .bodyContent image {
+  width: 100%;
+}
+
+.body .bodyContent video {
+  width: 100%;
+}
+
+.body .bodyContent .audio {
+  margin-top: 10rpx;
+  display: flex;
+  width: 100%;
+  height: 100rpx;
+  align-items: center;
+  color: #333;
+}
+
+.body .bodyContent .audio image {
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 20rpx;
+}
+
+.body .bodyContent .audio .name {
+  font-size: 25rpx;
+  margin-top: 6rpx;
+  color: #666;
+}
+
+
+.foot {
+  margin-top: 25rpx;
+  display: flex;
+  justify-content: space-around;
+  color: #aaa;
+}
+
+.foot view {
+  width: 24%;
+  text-align: center;
+  border-right: 1px solid #aaa;
+}
+
+.foot view button {
+  padding: 0;
+  margin: -10rpx;
+  width: 50rpx;
+  background-color: #fff;
+  display: inline-block;
+  color: #aaa;
+}
+
+.foot view:last-child {
+  border-right: none;
+}

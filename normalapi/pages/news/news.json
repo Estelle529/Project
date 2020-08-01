@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "onenew":"../../Components/onenew/onenew"
+  },
+  "navigationBarTitleText": "新闻页面"
+}

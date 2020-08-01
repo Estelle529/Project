@@ -1,0 +1,56 @@
+<import src="../tpls/products/products-tpl.wxml" />
+<import src="../tpls/story/story-tpl.wxml" />
+<view class="container">
+    <!-- 首页轮播图 -->
+    <swiper indicator-dots="true" autoplay="true" class="swiper">
+        <block wx:for="{{bannerArr}}">
+            <swiper-item class="banner-item" data-key="{{item.key_word}}" data-type="{{item.type}}" bindtap="bannerItemTap">
+                <image src="{{item.image.url}}" alt="" mode="aspectFill" />
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class="home-main">
+        <!-- 主题精选 -->
+        <view class="home-main-theme">
+            <view class="home-main-header">精选主题</view>
+            <view class="theme-box">
+                <block wx:for="{{themeArr}}">
+                    <view wx:if="{{index==2}}" class="theme-item big" bindtap="onThemesItemTap" data-id="{{item.id}}" data-name="{{item.name}}">
+                        <image src="{{item.topic_img.url}}"></image>
+                    </view>
+                    <view wx:else class="theme-item" bindtap="onThemesItemTap" data-id="{{item.id}}" data-name="{{item.name}}">
+                        <image src="{{item.topic_img.url}}"></image>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <!-- 单品首发 -->
+        <view class="home-main-products">
+            <view class="home-main-header">热门植物</view>
+            <template is="products" data="{{productsArr:productsArr}}" />
+        </view>
+        <!-- 植物文化 -->
+        <view class="home-main-story">
+            <view class="home-main-header">
+                植物文化
+                <text class="moreStory" bindtap="onAllStory">查看更多</text>
+                <image class="moreStoryImg" src="../../imgs/icon/arrow@right.png" />
+            </view>
+            <template is="story" data="{{plantsStory:recentStory}}" />
+        </view>
+        <!-- 养植误区 -->
+        <view class="home-main-mis">
+            <view class="home-main-header">
+                养植误区
+                <text class="changeMis" bindtap="changeMis">换一波</text>
+                <image class="changeMisImg" src="../../imgs/icon/change.png" animation="{{animationData}}"/>
+            </view>
+            <block wx:for="{{pageMis}}">
+                <view class="misCon">
+                    <view class="misName">{{item.name}}</view>
+                    <view class="misDetail">{{item.detail}}</view>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>

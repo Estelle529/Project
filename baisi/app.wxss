@@ -1,0 +1,12 @@
+/**app.wxss**/
+/* 引入字体图标 */
+@import '/utils/iconfont.wxss';
+@font-face {
+  font-family: 'iconfont';  /* project id 1971970 */
+  src: url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.eot');
+  src: url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1971970_4p5ho8zeqra.svg#iconfont') format('svg');
+}
