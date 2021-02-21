@@ -1,0 +1,30 @@
+.userinfo p{
+    color: #212121;
+    font-size: 0.3rem;
+    padding-left: 0.3rem;
+    font-weight: bold;
+}
+.userinfo input{
+    width: 6.67rem;
+    height: 1rem;
+    margin: 0 auto;
+    display: block;
+    border: none;
+    border-radius: 0.2rem;
+    text-indent: 0.2rem;
+    font-size: 0.3rem;
+    color: #333;
+}
+.userinfo .submit{
+    width: 5.07rem;
+    height: 0.8rem;
+    text-align: center;
+    line-height: 0.8rem;
+    color: #fff;
+    font-size: 0.35rem;
+    background-color: #FFCB26;
+    margin: 0.5rem auto 0;
+    border-radius: 0.5rem;
+    letter-spacing: 1px;
+    font-weight: bold;
+}

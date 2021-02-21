@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>修改个人信息</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="./css/vant.css"/>
+    <link rel="stylesheet" href="./css/editmessage.css">
+    <link rel="stylesheet" href="./css/util.css"/>
+    <style>
+        html {
+            font-size: 13.33vw;
+        }
+
+        body {
+            background-color: #F5F5F5;
+        }
+
+        p, spam, div {
+            font-size: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+<div class="userinfo" id="userinfo">
+    <p>姓名：</p>
+    <input placeholder="填写您的姓名" v-model="name" />
+    <p>手机号码：</p>
+    <input placeholder="填写您的手机号" v-model="tel" />
+    <div class="submit" @click="submit">立即提交</div>
+</div>
+</body>
+<script src="./js/vue.js"></script>
+<script src="./css/util.css"></script>
+<script src="./js/util.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.1/lib/vant.min.js"></script>
+<script>
+    new Vue({
+        el: "#userinfo",
+        data() {
+            return {
+                name:'',
+                tel:''
+            }
+        },
+        created() {
+        },
+        mounted() {
+
+        },
+        methods: {
+            submit(){
+                if(!this.name){
+                    vant.Toast('请填写用户名');
+                    return false;
+                }
+                if(!this.tel){
+                    vant.Toast('请填写手机号');
+                    return false;
+                }
+                const reg_tel = /^(13[0-9]|14[01456879]|15[0-3,5-9]|16[2567]|17[0-8]|18[0-9]|19[0-3,5-9])\d{8}$/;
+                if(!reg_tel.test(this.tel)){
+                    vant.Toast('请填写正确的手机号');
+                    return false;
+                }
+                console.log(this.name,this.tel);
+                var token = JSON.parse(getCookie('user')).token;
+                // $.get(baseurl + `index/activity?page=${this.page}&limit=15&token=${token}&shop_id=${shop_id}`, (res) => {
+                //     aftermethod(res, this.setactivitylist, this.mytoast, this.reflogin)
+                // })
+            }
+        }
+    })
+</script>
+</html>

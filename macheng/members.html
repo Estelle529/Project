@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>中奖人</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="./css/members.css">
+    <link rel="stylesheet" href="./css/vant.css"/>
+    <link rel="stylesheet" href="./css/util.css"/>
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+        html {
+            font-size: 13.33vw;
+        }
+
+        body {
+            background-color: #F5F5F5;
+        }
+
+        p, spam, div {
+            font-size: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+<div id="members" v-cloak>
+    <div v-for="(item,index) in memberslist" :key="index" class="onemember">
+        <img :src="item.avatar"/>
+        <span>{{item.nickname}}</span>
+    </div>
+   <img src="./static/image/nosuccess.png" class="nosuccess" v-if="memberslist.length == 0"/>
+</div>
+</body>
+<script src="./js/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.1/lib/vant.min.js"></script>
+<script src="./js/util.js"></script>
+<script>
+    var members = new Vue({
+        el: '#members',
+        data() {
+            return {
+                memberslist: [],
+                activityid:'',
+                baseimg: 'http://macheng.yongmiaonet.com'
+            }
+        },
+        created() {
+            var location = window.location.href;
+            if (location.indexOf('?') != -1) {
+                var params = location.split('?')[1];
+                this.activityid = params.split('=')[1];
+            }
+            this.getlist(this.activityid);
+        },
+        methods: {
+            getlist(id) {
+                var toast = vant.Toast.loading({
+                    forbidClick: true,
+                    message: "加载中..."
+                });
+                var token = JSON.parse(getCookie('user')).token;
+                $.getJSON(baseurl + `Activity/awardsPeople?token=${token}&activity_id=${id}`, (res) => {
+                    vant.Toast.clear();
+                    aftermethod(res, this.setlist, this.mytoast)
+                })
+            },
+            setlist(res){
+               this.memberslist = res.data
+            }
+        }
+    })
+</script>
+</html>

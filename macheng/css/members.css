@@ -1,0 +1,23 @@
+.onemember{
+    padding: 0.2rem;
+    display: flex;
+    border-bottom: 0.02rem solid #F5F5F5;
+    background-color: #fff;
+    align-items: center;
+}
+.onemember img{
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+}
+.onemember span{
+    font-size: 0.3rem;
+    font-weight: bold;
+    margin-left: 0.2rem;
+}
+.nosuccess{
+    width: 3.72rem;
+    height: 4.11rem;
+    margin: 2rem auto 0;
+    display: block;
+}

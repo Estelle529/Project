@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="./css/vant.css"/>
+    <link rel="stylesheet" href="./css/util.css"/>
+    <style>
+        html {
+            font-size: 13.33vw;
+        }
+
+        body {
+            background-color: #F5F5F5;
+        }
+
+        p, spam, div {
+            font-size: 0.3rem;
+        }
+    </style>
+    <title>操作指引</title>
+</head>
+<body>
+<div class="guide" id="guide">
+<div v-html="guideteps"></div>
+</div>
+</body>
+<script src="./js/vue.js"></script>
+<script src="./js/zepto.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.1/lib/vant.min.js"></script>
+<script src="./js/util.js"></script>
+<script>
+    var guide = new Vue({
+        el: "#guide",
+        data() {
+            return {
+                guideteps: ''
+            }
+        },
+        created() {
+            var toast = vant.Toast.loading({
+                forbidClick: true,
+                message: "加载中..."
+            });
+            var token = JSON.parse(getCookie('user')).token;
+            $.getJSON(baseurl + 'activity/get_conf?token=' + token + '&type=help', (res) => {
+                console.log(res);
+                vant.Toast.clear();
+                if(res.code == 2){
+                    window.history.back(-1);
+                }
+                this.guideteps = res.data.value;
+            })
+        }
+    })
+</script>
+</html>

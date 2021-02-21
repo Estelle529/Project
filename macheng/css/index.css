@@ -1,0 +1,258 @@
+body::-webkit-scrollbar {
+    display: none;
+}
+.outside{
+    height: calc(100vh - 1.1rem);
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.outside::-webkit-scrollbar {
+    display: none;
+}
+
+.widthset {
+    width: 6.95rem;
+    margin: 0 auto;
+}
+
+.banner {
+    height: 3.09rem;
+    overflow: hidden;
+    margin: 0.2rem auto;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.van-swipe {
+    width: 100%;
+    height: 100%;
+}
+
+.van-swipe img {
+    width: 6.95rem;
+    height: 3.09rem;
+    pointer-events: none;
+}
+
+.custom-indicator {
+    position: absolute;
+    right: 0.05rem;
+    bottom: 0.05rem;
+    padding: 0.02rem 0.05rem;
+    font-size: 0.12rem;
+    color: #FF4B10;
+    background: #FF4B10;
+}
+.van-swipe .van-swipe__indicator{
+    width: 0.15rem;
+    height: 0.15rem;
+}
+.shoplist {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.shoplist .oneshop {
+    width: 1.5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.shoplist img {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+}
+
+.shoplist .oneshop .shopname {
+    width: 1.4rem;
+    font-size: 0.26rem;
+    color: #1B1B1B;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.slideimg {
+    width: 100%;
+    height: 1.81rem;
+}
+
+.titleimg {
+    width: 2.49rem;
+    height: 0.72rem;
+    margin: 0.2rem;
+}
+
+.activitylist {
+    width: 7.03rem;
+    margin: 0 auto;
+}
+
+.onactivity {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0.2rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.2rem 0;
+}
+
+.activityhead {
+    width: 100%;
+    height: 4.05rem;
+    position: relative;
+}
+
+.activityhead .mainimg {
+    width: 100%;
+    height: 4.05rem;
+}
+
+.activityhead p {
+    width: 100%;
+    height: 0.7rem;
+    position: absolute;
+    left: 0;
+    bottom: -0.4rem;
+    display: flex;
+    align-items: center;
+    background-color: #FFCB26;
+    padding: 0;
+    opacity: 0.95;
+
+}
+
+.activityhead p img {
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 50%;
+    margin-left: 0.2rem;
+    opacity: 1;
+
+}
+
+.activityhead p span {
+    color: #fff;
+    font-size: 0.25rem;
+    margin-left: 0.2rem;
+    opacity: 1;
+}
+
+.activityname {
+    font-size: 0.36rem;
+    color: #000;
+    width: 6.6rem;
+    margin: 0.25rem auto 0;
+    font-weight: bold;
+}
+
+.activityinfo {
+    width: 6.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.activityinfo .activityjoin img {
+    width: 0.22rem;
+    height: 0.24rem;
+    margin-right: 0.1rem;
+}
+.activityinfo .activityjoin span {
+    color: #686767;
+    font-size: 0.22rem;
+}
+.actiovityslogn{
+    width: 6.6rem;
+    margin: 0 auto;
+    color: #5D5D5D;
+    font-size: 0.28rem;
+}
+.activityprice{
+    width: 6.6rem;
+    margin: 0 auto 0.2rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.activityprice .bottomcon{
+    display: flex;
+    align-items: center;
+}
+.activityprice .bottomcon .pricehead{
+    color: #FF4A10;
+    font-size: 0.26rem;
+    font-weight: bold;
+}
+.activityprice .bottomcon .pricecontent{
+    color: #FF4B10;
+    font-size: 0.42rem;
+    font-weight: bold;
+    margin: 0 0.1rem;
+}
+.activityprice .bottomcon .minger{
+    height: 0.36rem;
+    background-color: rgb(255,85,25);
+    line-height: 0.36rem;
+    padding: 0 0.2rem;
+    font-size: 0.23rem;
+    color: #fff;
+    border-top-left-radius: 0.2rem;
+    border-top-right-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+}
+.activityprice .joinbtn{
+    width: 2.1rem;
+    height: 0.7rem;
+    border-radius: 0.5rem;
+    background-color: rgb(255,203,28);
+    line-height: 0.7rem;
+    text-align: center;
+    font-size: 0.38rem;
+    font-weight: bold;
+    color: #fff;
+}
+.bottomnavigate{
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #fff;
+}
+.bottomnavigate .onetarget{
+    width: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bottomnavigate .onetarget img{
+    width: 0.46rem;
+    height: 0.46rem;
+}
+.bottomnavigate .onetarget p{
+   color: #5F3E28;
+    font-size: 0.23rem;
+    margin: 0;
+    padding: 0;
+}
+.noactivity{
+    width: 3.72rem;
+    height: 4.11rem;
+    margin: 0.2rem auto 0;
+    display: block;
+}

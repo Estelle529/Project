@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>报名成功</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="./css/util.css"/>
+    <style>
+        html {
+            font-size: 13.33vw;
+        }
+
+        body {
+            background-color: #F5F5F5;
+        }
+
+        p, spam, div {
+            font-size: 0.3rem;
+        }
+        .image{
+            width: 2.74rem;
+            height: 2.74rem;
+            border-radius: 50%;
+            margin: 1rem auto;
+            display: block;
+        }
+        .p1{
+            text-align: center;
+            color: #222222;
+            font-size: 0.44rem;
+            font-weight: bold;
+        }
+        .p2{
+            text-align: center;
+            color: #686767;
+            font-size: 0.3rem;
+            font-weight: bold;
+            padding: 0;
+            margin: 0;
+        }
+        .iknow{
+            width: 6rem;
+            height: 0.88rem;
+            background-color: #FFCB26;
+            color: #fff;
+            font-size: 0.3rem;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin: 0.3rem auto 0;
+            text-align: center;
+            line-height: 0.88rem;
+            border-radius: 0.88rem;
+        }
+    </style>
+</head>
+<body>
+<img class="image" src="./static/image/success.png"/>
+<p class="p1">报名成功</p>
+<p class="p2">等待开奖</p>
+<div class="iknow">我知道了</div>
+</body>
+<script src="./js/util.js"></script>
+<script>
+    var myhref = window.location.href;
+    if (myhref.indexOf('?') != -1) {
+        var opentime = decodeURI(myhref.split('?')[1].split('=')[1]);
+        var p2 = document.getElementsByClassName('p2')[0];
+        p2.innerText = opentime + '开奖';
+    }
+    var btn = document.getElementsByClassName('iknow')[0];
+    btn.onclick = function(){
+        location.replace('index.html');
+    }
+</script>
+</html>

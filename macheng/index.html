@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>美团霸王餐</title>
+    <!--  vant 组件库 -->
+    <meta charset="UTF-8" name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.1/lib/index.css">-->
+    <link rel="stylesheet" href="./css/vant.css"/>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/util.css">
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+        html {
+            font-size: 13.33vw;
+        }
+
+        body {
+            background-color: #F5F5F5;
+        }
+
+        p, spam, div {
+            font-size: 0.3rem;
+        }
+
+        body {
+            -webkit-text-size-adjust: 100% !important;
+        }
+    </style>
+</head>
+<body>
+<div id="index" v-cloak>
+
+    <div class="outside" ref="outside">
+        <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+            <div class="inside" ref="inside">
+                <div class="widthset banner">
+                    <van-swipe :autoplay="5000" :loop="true" indicator-color="#FF4B10">
+                        <van-swipe-item v-for="(item, index) in bannerlist" :key="index">
+                            <img :src="baseimg + item.img_url"/>
+                        </van-swipe-item>
+                    </van-swipe>
+                </div>
+                <div class="widthset shoplist">
+                    <div class="oneshop" v-for="(item,index) in shoplist" @click="gothisshop(item.shop_id)">
+                        <img :src="baseimg + item.shop_pic"/>
+                        <p class="shopname" v-cloak>{{item.linkman}}</p>
+                    </div>
+                </div>
+                <img src="./static/image/slideimg.png" class="slideimg"/>
+                <img src="./static/image/bawangtitle.png" class="titleimg"/>
+                <div class="activitylist">
+                    <oneactivity v-for="(item,index) in activitylist" :key="index" :oneactivity="item"
+                                 :baseimg="baseimg"></oneactivity>
+                    <img class="noactivity" src="./static/image/noactivity.png" v-show="showno" />
+                </div>
+            </div>
+        </van-pull-refresh>
+    </div>
+
+
+    <div class="bottomnavigate">
+        <a class="onetarget" href="#">
+            <img src="./static/image/home_select.png"/>
+            <p>首页</p>
+        </a>
+        <div class="onetarget" @click="goorder">
+            <img src="./static/image/order.png"/>
+            <p>订单</p>
+        </div>
+        <div class="onetarget" @click="gomain">
+            <img src="./static/image/user.png"/>
+            <p>我的</p>
+        </div>
+    </div>
+</div>
+</body>
+<script src="./js/vue.js"></script>
+<script src="./js/zepto.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.1/lib/vant.min.js"></script>
+<script src="./css/util.css"></script>
+<script src="./js/util.js"></script>
+<script type='text/x-template' id='oneactivity'>
+    <div class="onactivity">
+        <div class="activityhead" @click="gotarget(oneactivity.id)">
+            <img :src="baseimg + oneactivity.picurl" class="mainimg"/>
+            <p>
+                <img src="./static/image/time.png"/>
+                <span class="startendtime">{{oneactivity.start_time_change}}开始 - {{oneactivity.end_time_change}}结束</span>
+            </p>
+        </div>
+        <p class="activityname">{{oneactivity.title}}</p>
+        <div class="activityinfo">
+            <p class="activityjoin">
+                <img src="./static/image/joinman.png"/>
+                <span>报名人数：{{oneactivity.use_number}}</span>
+            </p>
+            <p class="activityjoin">
+                <img src="./static/image/happyman.png"/>
+                <span>我的中奖券：{{oneactivity.winning_roll || 0}}</span>
+            </p>
+        </div>
+        <p class="actiovityslogn">{{oneactivity.short_title}}</p>
+        <div class="activityprice">
+            <div class="bottomcon">
+                <span class="pricehead">原价 : </span>
+                <span class="pricecontent">{{oneactivity.price * 1}}</span>
+                <div class="minger">
+                    霸王名额：{{oneactivity.prize_number}}
+                </div>
+            </div>
+            <div class="joinbtn" v-if="oneactivity.is_signUp > 0" style="background: #FFE592">已报名</div>
+            <div class="joinbtn" v-else @click="joinnow(oneactivity.id,oneactivity.open_prize_time_change)">立即报名</div>
+        </div>
+    </div>
+</script>
+<script>
+    (function () {
+        if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+            handleFontSize();
+        } else {
+            if (document.addEventListener) {
+                document.addEventListener("WeixinJSBridgeReady", handleFontSize, false);
+            } else if (document.attachEvent) {
+                //IE浏览器，非W3C规范
+                document.attachEvent("onWeixinJSBridgeReady", handleFontSize);
+            }
+        }
+
+        function handleFontSize() {
+            // 设置网页字体为默认大小
+            WeixinJSBridge.invoke('setFontSizeCallback', {'fontSize': 0});
+            // 重写设置网页字体大小的事件
+            WeixinJSBridge.on('menu:setfont', function () {
+                WeixinJSBridge.invoke('setFontSizeCallback', {'fontSize': 0});
+            });
+        }
+    })()
+    const vm = new Vue({
+        el: "#index",
+        data() {
+            return {
+                bannerlist: [],
+                baseimg: 'http://macheng.yongmiaonet.com',
+                shoplist: [],
+                token: "",
+                page: 1,
+                activitylist: [],
+                containerHeight: 0,
+                innerHeight: 0,
+                loading: false,
+                nomore: false,
+                code: '',
+                isLoading: false,
+                showno: false
+            }
+        },
+        created() {
+            var location = window.location.href;
+            if (location.indexOf('?') != -1) {
+                var params = location.split('?')[1];
+                var arr = params.split('&');
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].split('=')[0] == 'code') {
+                        this.code = arr[i].split('=')[1];
+                    }
+                }
+            }
+            var user = getCookie('user');
+            if (!this.code && !user) {
+                this.init();
+            } else if (this.code && !user) {
+                $.getJSON(baseurl + 'login/register?code=' + this.code + '&parent_id=', (res) => {
+                    if (res.code == 0) {
+                        setCookie('user', JSON.stringify(res.data), 30);
+                        this.init();
+                    }
+                })
+            } else if (user) {
+                this.token = JSON.parse(user).token;
+                console.log(this.token);
+                this.init();
+            }
+        },
+        mounted() {
+            this.containerHeight = this.$refs.outside.clientHeight;
+            this.innerHeight = this.$refs.inside.offsetHeight;
+            this.$refs.outside.addEventListener('scroll', this.scrollmethod);
+        },
+        methods: {
+            init() {
+                this.activitylist = [];
+                $.getJSON(baseurl + 'index/ad?type=1', (res) => {
+                    aftermethod(res, this.setbanner, this.mytoast)
+                })
+                $.getJSON(baseurl + 'index/shop', (res) => {
+                    aftermethod(res, this.setshop, this.mytoast)
+                })
+                this.getpageactive();
+            },
+            mytoast(msg) {
+                vant.Toast.fail(msg);
+                return false;
+            },
+            goorder() {
+                location.replace('order.html');
+            },
+            gomain() {
+                location.replace('user.html');
+            },
+            //分页获取活动列表
+            getpageactive() {
+                var toast = vant.Toast.loading({
+                    duration: 0,
+                    forbidClick: true,
+                    message: "加载中..."
+                });
+                $.getJSON(baseurl + `index/activity?page=${this.page}&limit=15&token=${this.token}&shop_id`, (res) => {
+                    if (res.code == 2) {
+                        this.reflogin();
+                        return false;
+                    }
+                    vant.Toast.clear(toast);
+                    aftermethod(res, this.setactivitylist, this.mytoast, this.reflogin);
+                })
+            },
+            setbanner(res) {
+                this.bannerlist = res.data;
+            },
+            setshop(res) {
+                // console.log(res)
+                this.shoplist = res.data;
+            },
+            setactivitylist(res) {
+                // console.log(format)
+                if (res.data.data.length == 0) {
+                    var mytoast = vant.Toast('暂无更多活动');
+                    setTimeout(() => {
+                        vant.Toast.clear(mytoast);
+                    }, 1000)
+                    this.nomore = true;
+                }else{
+                    console.log('有更多数据');
+                }
+                var arr = res.data.data.map(item => {
+                    item.end_time_change = format(item.end_time);
+                    item.open_prize_time_change = format(item.open_prize_time);
+                    item.start_time_change = format(item.start_time);
+                    item.update_time_change = format(item.update_time);
+                    item.use_end_time_change = format(item.use_end_time);
+                    item.use_start_time_change = format(item.use_start_time);
+                    return item;
+                });
+                this.activitylist = this.activitylist.concat(arr);
+                if (this.activitylist.length == 0) {
+                    this.showno = true;
+                }
+                setTimeout(() => {
+                    this.loading = false;
+                }, 2000)
+            },
+            scrollmethod(e) {
+                if (this.loading || this.nomore) return false;
+                this.innerHeight = this.$refs.inside.offsetHeight;
+                var scrollTop = e.target.scrollTop;
+
+                if (scrollTop + this.containerHeight >= this.innerHeight) {
+                    console.log('触底了')
+                    this.loading = true;
+                    this.page = this.page + 1;
+                    this.getpageactive();
+                }
+            },
+            gothisshop(id) {
+                var user = getCookie('user');
+                if (user) {
+                    window.location.href = 'shopactivities.html?id=' + id;
+                } else {
+                    this.reflogin();
+                }
+            },
+            //重新登录
+            reflogin() {
+                setCookie('user', "", -1);
+                // 请求授权
+                const callbackURL = encodeURIComponent('http://macheng.yongmiaonet.com/public/macheng/index.html');
+                const wechatId = 'wxcc551f499320ae80';
+                const redirectURI =
+                    `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wechatId}&redirect_uri=${callbackURL}&response_type=code&scope=snsapi_userinfo&state=login#wechat_redirect`
+                location.replace(redirectURI);
+            },
+            onRefresh() {
+                this.bannerlist = [];
+                this.shoplist = [];
+                this.page = 1;
+                this.activitylist = [];
+                this.loading = false;
+                this.nomore = false;
+                this.init();
+                setTimeout(() => {
+                    this.isLoading = false;
+                }, 1000);
+            }
+        },
+        components: {
+            oneactivity: {
+                props: ["oneactivity", "baseimg"],
+                template: '#oneactivity',
+                created: function () {
+                    console.log("渲染")
+                },
+                methods: {
+                    gotarget(id) {
+                        //    跳转到详情页
+                        window.location.href = 'detail.html?id=' + id;
+                    },
+                    joinnow(id, time) {
+                        var user = getCookie('user');
+                        if (user) {
+                            let token = JSON.parse(getCookie('user')).token;
+                            $.getJSON(baseurl + 'order/add?token=' + token + '&id=' + id, res => {
+                                console.log(res);
+                                if(res.code == 0) {
+                                    // vant.Toast('报名成功');
+                                    this.oneactivity.is_signUp = 1;
+                                    location.replace('joinsuccess.html?open=' + time);
+                                }else if(res.code == 1){
+                                    vant.Toast(res.msg);
+                                }
+                            })
+                        } else {
+                            // 请求授权
+                            const callbackURL = encodeURIComponent('http://macheng.yongmiaonet.com/public/macheng/index.html');
+                            const wechatId = 'wxcc551f499320ae80';
+                            const redirectURI =
+                                `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wechatId}&redirect_uri=${callbackURL}&response_type=code&scope=snsapi_userinfo&state=login#wechat_redirect`
+                            location.replace(redirectURI);
+                        }
+                    }
+                },
+                watch: {}
+            }
+        },
+        destroyed() {
+            this.$refs.outside.removeEventListener('scroll', this.scrollmethod);
+        }
+    })
+
+
+    Vue.use(vant.Lazyload);
+
+
+</script>
+</html>

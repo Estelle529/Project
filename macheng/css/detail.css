@@ -1,0 +1,245 @@
+body {
+    background-color: #F5F5F5;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.banner {
+}
+
+.van-swipe {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0rem 0.2rem 0.5rem #fff;
+}
+
+.van-swipe img {
+    width: 7.5rem;
+    height: 4.3rem;
+    pointer-events: none;
+}
+
+.van-swipe .van-swipe__indicator {
+    width: 0.15rem;
+    height: 0.15rem;
+}
+
+.van-swipe .van-swipe__indicators {
+    bottom: 0.7rem;
+}
+
+.custom-indicator {
+    position: absolute;
+    right: 0.05rem;
+    bottom: 0.05rem;
+    padding: 0.02rem 0.05rem;
+    font-size: 0.12rem;
+    color: #FF4B10;
+    background: #FF4B10;
+}
+
+.info {
+    position: absolute;
+    left: 0.24rem;
+    top: 4rem;
+    border-radius: 0.2rem;
+    width: 7.02rem;
+    height: 2.8rem;
+    background-color: #fff;
+    padding: 0.2rem 0;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.info .infoname {
+    width: 6.32rem;
+    margin: 0 auto;
+    color: #000;
+    font-weight: bold;
+    font-size: 0.36rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.info .infotime {
+    display: flex;
+    width: 6.32rem;
+    justify-content: space-between;
+    margin: 0.3rem auto;
+}
+
+.info .infotime span {
+    color: #686767;
+    font-size: 0.24rem;
+}
+
+.info .infodes {
+    width: 6.32rem;
+    color: #5D5D5D;
+    font-size: 0.28rem;
+    margin: 0 auto 0.2rem;
+}
+
+.info .infoprice {
+    width: 6.32rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info .infoprice p {
+    display: flex;
+    align-items: flex-end;
+
+}
+
+.info .infoprice .pricetitle {
+    color: #FF4A10;
+    font-size: 0.26rem;
+    font-weight: bold;
+    margin-bottom: 0.1rem;
+}
+
+.info .infoprice .price {
+    color: #FF4B10;
+    font-size: 0.42rem;
+    font-weight: bold;
+}
+
+.info .infoprice .bawangnum {
+    color: #fff;
+    font-size: 0.22rem;
+    padding: 0 0.15rem;
+    background-color: #FF5417;
+    border-top-left-radius: 0.2rem;
+    border-top-right-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+    height: 0.35rem;
+    line-height: 0.35rem;
+    margin-bottom: 0.1rem;
+    margin-left: 0.1rem;
+}
+
+.info .infoprice img {
+    width: 0.22rem;
+    height: 0.24rem;
+}
+
+.info .infoprice p:last-child span {
+    color: #686767;
+    font-size: 0.22rem;
+    font-weight: bold;
+    margin-left: 0.1rem;
+}
+.address{
+    width: 7.02rem;
+    margin: 3.05rem auto 0;
+    display: flex;
+    background-color: #fff;
+    border-radius: 0.2rem;
+    justify-content: space-around;
+    padding: 0.15rem 0;
+}
+.address img{
+    width: 1.78rem;
+    height: 1.78rem;
+}
+.address .addressinfo{
+    width: 4.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.address .addressinfo .addressdesc{
+    width: 3.3rem;
+}
+.address .addressinfo .addressdesc p:first-child{
+    color: #000;
+    width: 100%;
+    font-size: 0.28rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.address .addressinfo .addressdesc p:nth-child(2){
+    width: 100%;
+    color: #686767;
+    font-size: 0.22rem;
+    margin: 0.1rem 0;
+}
+.address .addressinfo .addressdesc p:last-child{
+    width: 100%;
+    color: #5D5D5D;
+    font-size: 0.24rem;
+}
+.address .addressinfo .contect{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.address .addressinfo .contect img{
+    width: 0.49rem;
+    height: 0.49rem;
+}
+.richhtml{
+    width: 7.02rem;
+    padding: 0.2rem 0;
+    margin: 0.2rem auto 1.2rem;
+    background-color: #fff;
+    border-radius: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.richhtml  img{
+    width: 6.8rem;
+    height: auto;
+}
+.detailbottom{
+    width: 100%;
+    height: 1.2rem;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: #fff;
+    align-items: center;
+}
+.detailbottom img{
+    width: 0.43rem;
+    height: 0.66rem;
+}
+.detailbottom .joinnow{
+    width: 5.54rem;
+    height: 0.8rem;
+    background-color: #FFCC21;
+    color: #fff;
+    border-radius: 0.5rem;
+    text-align: center;
+    line-height: 0.8rem;
+    font-size: 0.38rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.detailbottom .alljoin{
+    background-color: #FFE592;
+}
+.shareguide{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}

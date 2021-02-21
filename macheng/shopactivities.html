@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <!--  vant 组件库 -->
+    <link rel="stylesheet" href="./css/vant.css"/>
+    <link rel="stylesheet" href="./css/shopactivities.css">
+    <link rel="stylesheet" href="./css/util.css"/>
+    <title>霸王餐</title>
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+        html {
+            font-size: 13.33vw;
+        }
+
+        body {
+            background-color: #F5F5F5;
+        }
+
+        p, spam, div {
+            font-size: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+<div id="activities" v-cloak>
+    <div class="outside" ref="outside">
+        <div class="inside" ref="inside">
+            <oneactivity v-for="(item,index) in activitylist" :key="index" :oneactivity="item"
+                         :baseimg="baseimg"></oneactivity>
+        </div>
+        <img src="./static/image/noactivity.png" class="noactivity" v-if="activitylist.length == 0"/>
+    </div>
+</div>
+</body>
+<script src="./js/vue.js"></script>
+<script src="./js/zepto.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.1/lib/vant.min.js"></script>
+<script src="./js/util.js"></script>
+<script type='text/x-template' id='oneactivity'>
+    <div class="onactivity">
+        <div class="activityhead" @click="gotarget(oneactivity.id)">
+            <img :src="baseimg + oneactivity.picurl" class="mainimg"/>
+            <p>
+                <img src="./static/image/time.png"/>
+                <span class="startendtime">{{oneactivity.start_time_change}}开始 - {{oneactivity.end_time_change}}结束</span>
+            </p>
+        </div>
+        <p class="activityname">{{oneactivity.title}}</p>
+        <div class="activityinfo">
+            <p class="activityjoin">
+                <img src="./static/image/joinman.png"/>
+                <span>报名人数：{{oneactivity.use_number}}</span>
+            </p>
+            <p class="activityjoin">
+                <img src="./static/image/happyman.png"/>
+                <span>我的中奖券：{{oneactivity.winning_roll}}</span>
+            </p>
+        </div>
+        <p class="actiovityslogn">{{oneactivity.short_title}}</p>
+        <div class="activityprice">
+            <div class="bottomcon">
+                <span class="pricehead">原价 : </span>
+                <span class="pricecontent">{{oneactivity.price * 1}}</span>
+                <div class="minger">
+                    霸王名额：{{oneactivity.prize_number}}
+                </div>
+            </div>
+            <div class="joinbtn" v-if="oneactivity.is_signUp > 0" style="background: #FFE592">已报名</div>
+            <div class="joinbtn" v-else @click="joinnow(oneactivity.id,oneactivity.open_prize_time_change)">立即报名</div>
+        </div>
+    </div>
+</script>
+<script>
+    const activities = new Vue({
+        el: "#activities",
+        data() {
+            return{
+                loading:false,
+                nomore:false,
+                page:1,
+                shop_id:0,
+                activitylist: [],
+                baseimg:'http://macheng.yongmiaonet.com',
+
+            }
+        },
+        created(){
+            var id = window.location.href.split('?')[1].split('=')[1];
+            console.log(id);
+            this.shop_id = id;
+            this.getlist(id);
+        },
+        mounted() {
+            this.containerHeight = this.$refs.outside.clientHeight;
+            this.innerHeight = this.$refs.inside.offsetHeight;
+            this.$refs.outside.addEventListener('scroll', this.scrollmethod);
+        },
+        methods:{
+            getlist(shop_id){
+                var toast = vant.Toast.loading({
+                    forbidClick: true,
+                    message: "加载中..."
+                });
+                var token = JSON.parse(getCookie('user')).token;
+                $.getJSON(baseurl + `index/activity?page=${this.page}&limit=15&token=${token}&shop_id=${shop_id}`, (res) => {
+                    vant.Toast.clear();
+                    aftermethod(res, this.setactivitylist, this.mytoast, this.reflogin)
+                })
+            },
+            mytoast(msg) {
+                vant.Toast(msg);
+            },
+            reflogin(){
+                window.history.back(-1);
+            },
+            scrollmethod(e) {
+                if (this.loading || this.nomore) return false;
+                this.innerHeight = this.$refs.inside.offsetHeight;
+                var scrollTop = e.target.scrollTop;
+
+                if (scrollTop + this.containerHeight >= this.innerHeight) {
+                    console.log('触底了')
+                    this.loading = true;
+                    this.page = this.page + 1;
+                    this.getlist(this.shop_id);
+                }
+            },
+            setactivitylist(res) {
+                // console.log(format)
+                if (res.data.data.length == 0) {
+                    vant.Toast('暂无更多活动');
+                    this.nomore = true;
+                } else {
+                    var arr = res.data.data.map(item => {
+                        item.end_time_change = format(item.end_time);
+                        item.open_prize_time_change = format(item.open_prize_time);
+                        item.start_time_change = format(item.start_time);
+                        item.update_time_change = format(item.update_time);
+                        item.use_end_time_change = format(item.use_end_time);
+                        item.use_start_time_change = format(item.use_start_time);
+                        return item;
+                    });
+                    this.activitylist = this.activitylist.concat(arr);
+                }
+                setTimeout(() => {
+                    this.loading = false;
+                }, 2000)
+            },
+        },
+        components: {
+            oneactivity: {
+                props: ["oneactivity", "baseimg"],
+                template: '#oneactivity',
+                created: function () {
+                    console.log("渲染")
+                },
+                methods: {
+                    gotarget(id) {
+                        //    跳转到详情页
+                        window.location.href = 'detail.html?id=' + id;
+                    },
+                    joinnow(id,time){
+                        var user = getCookie('user');
+                        if(user){
+                            let token = JSON.parse(getCookie('user')).token;
+                            $.getJSON(baseurl + 'order/add?token=' + token + '&id=' + id, res => {
+                                console.log(res);
+                                if(res.code == 0){
+                                    // vant.Toast('报名成功');
+                                    window.location.href = 'joinsuccess.html?open=' + time;
+                                }
+                            })
+                        }else{
+                            window.history.back(-1);
+                        }
+                    }
+                },
+                watch: {}
+            }
+        },
+        destroyed() {
+            this.$refs.outside.removeEventListener('scroll', this.scrollmethod);
+        }
+    })
+</script>
+</html>

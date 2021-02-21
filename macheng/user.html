@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>我的</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <!--  vant 组件库 -->
+    <link rel="stylesheet" href="./css/vant.css"/>
+    <link rel="stylesheet" href="./css/user.css">
+    <link rel="stylesheet" href="./css/util.css"/>
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+        html {
+            font-size: 13.33vw;
+        }
+
+        body {
+            background-color: #F5F5F5;
+        }
+
+        p, spam, div {
+            font-size: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+<div id="user">
+    <div class="userhead">
+        <img :src="img?img:'./static/image/portrait.png'" class="userimg"/>
+        <span class="username" v-if="img != ''" v-cloak>{{name}}</span>
+        <span class="username" v-if="img == ''" @click="reflogin">点击立即登录</span>
+<!--        <a href="editmessage.html" v-if="img != ''">-->
+<!--            <img src="./static/image/edit.png" class="editimg"/>-->
+<!--        </a>-->
+    </div>
+    <div class="useroperation">
+        <img src="./static/image/operationsuggest.png" @click="gohelp"/>
+        <img src="./static/image/join.png" v-if="!tel"/>
+        <a :href="'tel:' + tel" v-if="tel"><img src="./static/image/join.png"/></a>
+    </div>
+    <div class="bottomnavigate">
+        <div class="onetarget" @click="goindex">
+            <img src="./static/image/home.png"/>
+            <p>首页</p>
+        </div>
+        <div class="onetarget" @click="goorder">
+            <img src="./static/image/order.png"/>
+            <p>订单</p>
+        </div>
+        <a class="onetarget" href="#">
+            <img src="./static/image/user_select.png"/>
+            <p>我的</p>
+        </a>
+    </div>
+</div>
+</body>
+<script src="./js/vue.js"></script>
+<script src="./js/zepto.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.1/lib/vant.min.js"></script>
+<script src="./js/util.js"></script>
+<script>
+    new Vue({
+        el: "#user",
+        data() {
+            return {
+                code: '',
+                name: '',
+                img: '',
+                tel:''
+            }
+        },
+        created() {
+            var location = window.location.href;
+            if (location.indexOf('?') != -1) {
+                var params = location.split('?')[1];
+                var arr = params.split('&');
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].split('=')[0] == 'code') {
+                        this.code = arr[i].split('=')[1];
+                    }
+                }
+            }
+            var user = getCookie('user');
+            if (this.code && !user) {
+                $.getJSON(baseurl + 'login/register?code=' + this.code + '&parent_id=', (res) => {
+                    if (res.code == 0) {
+                        setCookie('user', JSON.stringify(res.data), 30);
+                        this.name = res.data.nickname;
+                        this.img = res.data.avatar;
+                        this.gettel();
+                    }
+                })
+            } else if (user) {
+                this.name = JSON.parse(user).nickname;
+                this.img = JSON.parse(user).avatar;
+                this.gettel();
+                console.log(this.name, this.img);
+            }
+
+        },
+        mounted() {
+
+        },
+        methods: {
+            goindex() {
+                location.replace('index.html');
+            },
+            goorder() {
+                location.replace('order.html');
+            },
+            gohelp(){
+                window.location.href = 'guide.html';
+            },
+            //请求加盟电话
+            gettel(){
+                var token = JSON.parse(getCookie('user')).token;
+                $.getJSON(baseurl + 'activity/get_conf?token=' + token + '&type=service_phone', (res) => {
+                    console.log(res);
+                    if(res.code == 2){
+                        this.reflogin();
+                    }
+                    this.tel = res.data.value;
+                })
+            },
+            //重新登录
+            reflogin() {
+                setCookie('user','',-1);
+                // 请求授权
+                const callbackURL = encodeURIComponent('http://macheng.yongmiaonet.com/public/macheng/user.html');
+                const wechatId = 'wxcc551f499320ae80';
+                const redirectURI =
+                    `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wechatId}&redirect_uri=${callbackURL}&response_type=code&scope=snsapi_userinfo&state=login#wechat_redirect`
+                window.location.replace(redirectURI);
+            },
+        }
+    })
+</script>
+</html>

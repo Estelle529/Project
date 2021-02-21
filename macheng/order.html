@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>订单</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <!--  vant 组件库 -->
+    <link rel="stylesheet" href="./css/vant.css"/>
+    <link rel="stylesheet" href="./css/order.css">
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+        html {
+            font-size: 13.33vw;
+        }
+
+        body {
+            background-color: #F5F5F5;
+        }
+
+        p, spam, div {
+            font-size: 0.3rem;
+        }
+        .shadow{
+            display: none;
+        }
+        .show{
+            display: flex;
+        }
+        [v-vlovk]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="allorder" v-cloak>
+    <div class="headcat">
+        <span :class="['onecat', currentcat == 0 ? 'activecat' : '']" @click="changetype(0)">全部</span>
+        <span :class="['onecat', currentcat == 1 ? 'activecat' : '']" @click="changetype(1)">已中奖</span>
+        <span :class="['onecat', currentcat == 2 ? 'activecat' : '']" @click="changetype(2)">未开奖</span>
+        <span :class="['onecat', currentcat == 3 ? 'activecat' : '']" @click="changetype(3)">已结束</span>
+    </div>
+
+    <div class="outorder" ref="outorder">
+        <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+            <div class="inorder" ref="inorder">
+                <mycom v-for="(item,index) in orderlist" :thisorder="item" :baseimg="baseimg" :key="index"
+                       @openshadow="parentopen"></mycom>
+            </div>
+        </van-pull-refresh>
+        <img src="./static/image/noorder.png" v-if="showno" class="noorder"/>
+    </div>
+
+
+    <div class="bottomnavigate">
+        <div class="onetarget" @click="goindex">
+            <img src="./static/image/home.png"/>
+            <p>首页</p>
+        </div>
+        <a class="onetarget" href="#">
+            <img src="./static/image/order_select.png"/>
+            <p>订单</p>
+        </a>
+        <div class="onetarget" @click="gomain">
+            <img src="./static/image/user.png"/>
+            <p>我的</p>
+        </div>
+    </div>
+    <div :class="['shadow', submitmessage?'show':'']">
+        <div class="messagecon">
+            <img class="headimg" src="./static/image/congra.png"/>
+            <img class="close" src="./static/image/close.png" @click="close"/>
+            <P class="title">提交资料后中奖才能生效哦</P>
+            <div class="sendname">姓名：<input type="text" v-model="name"/></div>
+            <div class="sendtel">手机号：<input type="text" v-model="tel"/></div>
+            <p class="submit" @click="submit">立即提交</p>
+        </div>
+    </div>
+</div>
+</body>
+<script src="./js/vue.js"></script>
+<script src="./js/zepto.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.1/lib/vant.min.js"></script>
+<script src="./css/util.css"></script>
+<script src="./js/util.js"></script>
+<script type='text/x-template' id='myorder'>
+    <div class="oneorder">
+        <div class="opentime">
+            <span>开奖时间：{{thisorder.open_prize_time | timeform}}</span>
+            <span v-if="thisorder.status != 1">{{thisorder.status == 0 ? '未开奖' : '已结束，未中奖'}}</span>
+            <img v-if="thisorder.status == 1" src="./static/image/congratulate.png"/>
+        </div>
+        <div class="detail" @click="godetail(thisorder.activity_id)">
+            <img :src="baseimg + thisorder.activity_pic"/>
+            <div class="desc">
+                <p>{{thisorder.activity_title}}</p>
+                <p>{{thisorder.shop[0].shop_name}}</p>
+                <p>原价：￥{{thisorder.price}}</p>
+            </div>
+        </div>
+        <div class="openres" v-if="thisorder.status > 0">
+            <p class="restitle">{{thisorder.status == 1 ? '请在用餐前联系我们确认订单信息' : '这次没中奖呦，欢迎下次参与~'}}</p>
+            <p class="control" v-if="thisorder.status == 1"><span style="font-size: 0.26rem"
+                                                                  @click="submitmessage(thisorder.order_id)">填写信息</span><span
+                    style="font-size: 0.26rem;background-color:#FF5F2B;"><a
+                    :href="'tel:'+thisorder.shop[0].mobile">联系我们</a></span></p>
+            <p class="control" v-if="thisorder.status == 2"><span @click="getmembers(thisorder.activity_id)">中奖人</span>
+            </p>
+        </div>
+    </div>
+</script>
+<script>
+    new Vue({
+        el: "#allorder",
+        data() {
+            return {
+                currentcat: 0,
+                page: 1,
+                containerHeight: 0,
+                innerHeight: 0,
+                nomore: false,
+                loading: false,
+                baseimg: 'http://macheng.yongmiaonet.com',
+                orderlist: [],
+                code: '',
+                sendmessageid: '',
+                submitmessage: false,
+                name: '',
+                tel: '',
+                isLoading: false,
+                showno:false
+            }
+        },
+        methods: {
+            goindex() {
+                location.replace('index.html');
+            },
+            gomain() {
+                location.replace('user.html');
+            },
+            getlist() {
+                var toast = vant.Toast.loading({
+                    duration: 0,
+                    forbidClick: true,
+                    message: "加载中..."
+                });
+                var token = JSON.parse(getCookie('user')).token;
+                $.getJSON(baseurl + `order/index?token=${token}&type=${this.currentcat}&page=${this.page}&limit`, (res) => {
+                    console.log(res);
+                    vant.Toast.clear();
+                    aftermethod(res, this.setorderlist, this.mytoast,this.reflogin)
+                })
+            },
+            mytoast(msg) {
+                vant.Toast.fail(msg);
+            },
+            setorderlist(res) {
+                console.log(res);
+                if (res.data.data.length == 0) {
+                    var mytoast = vant.Toast('暂无更多数据');
+                    setTimeout(()=>{
+                        vant.Toast.clear(mytoast);
+                    },1000)
+                    this.nomore = true;
+                }else{
+                    console.log('有更多数据');
+                }
+                this.orderlist = this.orderlist.concat(res.data.data);
+                if(this.orderlist.length == 0){
+                    this.showno = true;
+                }
+                setTimeout(() => {
+                    this.loading = false;
+                }, 2000)
+            },
+            scrollmethod(e) {
+                if (this.loading || this.nomore) return false;
+                this.innerHeight = this.$refs.inorder.offsetHeight;
+                var scrollTop = e.target.scrollTop;
+
+                if (scrollTop + this.containerHeight >= this.innerHeight) {
+                    console.log('触底了')
+                    this.loading = true;
+                    this.page = this.page + 1;
+                    this.getlist();
+                }
+            },
+            //重新登录
+            reflogin() {
+                setCookie('user', "", -1);
+                // 请求授权
+                const callbackURL = encodeURIComponent('http://macheng.yongmiaonet.com/public/macheng/order.html');
+                const wechatId = 'wxcc551f499320ae80';
+                const redirectURI =
+                    `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wechatId}&redirect_uri=${callbackURL}&response_type=code&scope=snsapi_userinfo&state=login#wechat_redirect`
+                location.replace(redirectURI);
+            },
+            parentopen(id) {
+                this.sendmessageid = id;
+                this.submitmessage = true;
+            },
+            submit() {
+                if (!this.name) {
+                    var nametoast = vant.Toast('请填写用户名');
+                    setTimeout(()=>{
+                        vant.Toast.clear(nametoast);
+                    },1000)
+                    return false;
+                }
+                if (!this.tel) {
+                    var teltoast = vant.Toast('请填写手机号');
+                    setTimeout(()=>{
+                        vant.Toast.clear(teltoast);
+                    },1000)
+                    return false;
+                }
+                const reg_tel = /^(13[0-9]|14[01456879]|15[0-3,5-9]|16[2567]|17[0-8]|18[0-9]|19[0-3,5-9])\d{8}$/;
+                if (!reg_tel.test(this.tel)) {
+                    var truetoast = vant.Toast('请填写正确的手机号');
+                    setTimeout(()=>{
+                        vant.Toast.clear(truetoast);
+                    },1000)
+                    return false;
+                }
+                console.log(this.name, this.tel);
+                console.log(getCookie('user'));
+                var toast = vant.Toast.loading({
+                    forbidClick: true,
+                    message: "加载中..."
+                });
+                var token = JSON.parse(getCookie('user')).token;
+                $.getJSON(baseurl + `order/bind_mobile?token=${token}&name=${this.name}&mobile=${this.tel}&order_id=${this.sendmessageid}`, (res) => {
+                    vant.Toast.clear();
+                    aftermethod(res, this.snedsuccess, this.mytoast, this.reflogin)
+                })
+            },
+            snedsuccess() {
+                var successtoast = vant.Toast.success('提交成功');
+                setTimeout(()=>{
+                    vant.Toast.clear(successtoast);
+                },1000)
+                this.close();
+            },
+            close() {
+                this.sendmessageid = '';
+                this.submitmessage = false;
+                this.name = '';
+                this.tel = '';
+            },
+            changetype(type) {
+                if (this.currentcat == type) {
+                    return false;
+                } else {
+                    this.currentcat = type;
+                    this.nomore = false;
+                    this.isLoading = false;
+                    this.orderlist = [];
+                    this.page = 1;
+                    this.getlist();
+                }
+            },
+            onRefresh() {
+                this.nomore = false;
+                this.isLoading = false;
+                this.orderlist = [];
+                this.page = 1;
+                this.getlist();
+                setTimeout(() => {
+                    this.isLoading = false;
+                }, 1000);
+            }
+        },
+        created() {
+            var location = window.location.href;
+            if (location.indexOf('?') != -1) {
+                var params = location.split('?')[1];
+                var arr = params.split('&');
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].split('=')[0] == 'code') {
+                        this.code = arr[i].split('=')[1];
+                    }
+                }
+            }
+            var user = getCookie('user');
+            if (!this.code && !user) {
+                this.reflogin();
+            } else if (this.code && !user) {
+                $.getJSON(baseurl + 'login/register?code=' + this.code + '&parent_id=', (res) => {
+                    if (res.code == 0) {
+                        setCookie('user', JSON.stringify(res.data), 30);
+                        this.getlist();
+                    }
+                })
+            } else if (user) {
+                this.getlist();
+            }
+        },
+        mounted() {
+            this.containerHeight = this.$refs.outorder.clientHeight;
+            this.innerHeight = this.$refs.inorder.offsetHeight;
+            this.$refs.outorder.addEventListener('scroll', this.scrollmethod);
+        },
+        components: {
+            mycom: {
+                template: '#myorder',
+                props: ['thisorder', 'baseimg'],
+                created: function () {
+                    console.log("渲染")
+                },
+                methods: {
+                    submitmessage(id) {
+                        this.$emit('openshadow', id)
+                    },
+                    getmembers(id) {
+                        window.location.href = 'members.html?id=' + id;
+                    },
+                    godetail(id){
+                        window.location.href = 'detail.html?id=' + id;
+                    }
+                },
+                filters: {
+                    timeform: function (value) {
+                        var time = format(value);
+                        return time;
+                    }
+                },
+                watch: {}
+            }
+        }
+    })
+
+</script>
+</html>

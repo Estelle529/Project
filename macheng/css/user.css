@@ -1,0 +1,61 @@
+body{
+    background-color: #F5F5F5;
+}
+.userhead{
+    display: flex;
+    align-items: center;
+}
+.userhead .userimg{
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    margin: 0.2rem 0.2rem 0.2rem 0.48rem ;
+}
+.userhead span{
+    color: #050A10;
+    font-size: 0.32rem;
+    font-weight: bold;
+    margin-right: 0.2rem;
+}
+.userhead .editimg{
+    width: 0.3rem;
+    height: 0.3rem;
+}
+.useroperation{
+    width: 7.13rem;
+    margin: 0 auto;
+}
+.useroperation img{
+    width: 7.13rem;
+    height: 2.55rem;
+}
+.bottomnavigate {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #fff;
+}
+
+.bottomnavigate .onetarget {
+    width: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bottomnavigate .onetarget img {
+    width: 0.46rem;
+    height: 0.46rem;
+}
+
+.bottomnavigate .onetarget p {
+    color: #5F3E28;
+    font-size: 0.23rem;
+    margin: 0;
+    padding: 0;
+}

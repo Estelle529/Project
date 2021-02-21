@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--  vant 组件库 -->
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="./css/vant.css"/>
+    <link rel="stylesheet" href="./css/shoplist.css">
+    <link rel="stylesheet" href="./css/util.css"/>
+    <title>门店列表</title>
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+        html {
+            font-size: 13.33vw;
+        }
+
+        body {
+            background-color: #F5F5F5;
+        }
+
+        p, spam, div {
+            font-size: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+<div class="shoplist" id="shoplist" v-cloak>
+    <p class="title">离我最近</p>
+    <myshop :shop="shoplist[0]"></myshop>
+    <p class="title">门店列表</p>
+    <myshop v-for="(item,index) in shoplist" :key="index" :shop="item"></myshop>
+</div>
+</body>
+<script src="./js/vue.js"></script>
+<script src="./js/zepto.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.1/lib/vant.min.js"></script>
+<script src="./js/util.js"></script>
+<script src="./js/jweixin-1.6.0.js"></script>
+<script type='text/x-template' id='myshop'>
+    <div class="oneshop">
+        <img class="location" src="./static/image/location.png"/>
+        <div class="addressinfo">
+            <p>{{shop.shop_name}}</p>
+            <p>营业时间：{{shop.open_door}}</p>
+            <p>{{shop.address}}</p>
+        </div>
+        <div class="contect">
+            <a :href="'tel:'+shop.mobile">
+                <img src="./static/image/tel.png">
+            </a>
+            <p>联系电话</p>
+        </div>
+        <div class="getmap" @click="getmap(shop.lat,shop.lng,shop.shop_name,shop.address)">
+            <img src="./static/image/map.png">
+            <p>查看位置</p>
+        </div>
+    </div>
+</script>
+<script>
+    new Vue({
+        el: "#shoplist",
+        data() {
+            return {
+                shoplist: []
+            }
+        },
+        methods: {},
+        created() {
+            var shoplist = JSON.parse(decodeURI(getCookie('shoplist')));
+            this.shoplist = shoplist.sort(function (a, b) {
+                return a.distance - b.distance
+            });
+            console.log(this.shoplist);
+        },
+        mounted() {
+
+        },
+        components: {
+            myshop: {
+                template: '#myshop',
+                props: ["shop"],
+                created: function () {
+                    console.log("渲染")
+                },
+                methods: {
+                    getmap(lat, lng, shop_name, address) {
+                        var toast = vant.Toast.loading({
+                            duration: 0,
+                            forbidClick: true,
+                            message: "加载中..."
+                        });
+                        console.log(lat, lng, shop_name, address);
+                        let token = JSON.parse(getCookie('user')).token;
+                        //根据微信sdk获取当前的定位
+                        $.ajax({
+                            type: 'GET',
+                            url: 'http://macheng.yongmiaonet.com/index/js_sdk_conf',
+                            // data to be added to query string:
+                            data: {url: window.location.href.split('&')[0]},
+                            // type of data we are expecting in return:
+                            dataType: 'json',
+                            timeout: 300,
+                            success: (res) => {
+                                vant.Toast.clear(toast);
+                                wx.config({
+                                    debug: false,
+                                    appId: 'wxcc551f499320ae80',
+                                    timestamp: res.data.timestamp,
+                                    nonceStr: res.data.noncestr,
+                                    signature: res.data.signature,
+                                    jsApiList: [
+                                        'openLocation',
+                                        'getLocation',
+                                        'updateTimelineShareData',
+                                        'updateAppMessageShareData',
+                                        'onMenuShareAppMessage',
+                                        'onMenuShareTimeline'
+                                    ]
+                                });
+                                wx.ready(() => {
+                                    //获取地理位置
+                                    wx.getLocation({
+                                        type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                                        success: (res) => {
+
+                                            wx.openLocation({
+                                                latitude: lat * 1 - 0.005713, // 纬度，浮点数，范围为90 ~ -90
+                                                longitude: lng * 1 - 0.006593, // 经度，浮点数，范围为180 ~ -180。
+                                                name: shop_name, // 位置名
+                                                address: address, // 地址详情说明
+                                                scale: 15, // 地图缩放级别,整形值,范围从1~28。默认为最大
+                                                infoUrl: '', // 在查看位置界面底部显示的超链接,可点击跳
+                                                success: (res) => {
+                                                    console.log(res)
+                                                }
+                                            });
+
+                                        },
+                                        fail: (err) => {
+                                            vant.Toast('获取定位失败请重试');
+                                            wx.openLocation({
+                                                latitude: lat * 1 - 0.005713, // 纬度，浮点数，范围为90 ~ -90
+                                                longitude: lng * 1 - 0.006593, // 经度，浮点数，范围为180 ~ -180。
+                                                name: shop_name, // 位置名
+                                                address: address, // 地址详情说明
+                                                scale: 15, // 地图缩放级别,整形值,范围从1~28。默认为最大
+                                                infoUrl: '', // 在查看位置界面底部显示的超链接,可点击跳
+                                                success: (res) => {
+                                                    console.log(res)
+                                                }
+                                            });
+                                        }
+                                    });
+                                });
+                            },
+                            error: function (xhr, type) {
+                                vant.Toast.clear(toast);
+                                window.history.go(-1);
+                            }
+                        })
+                    }
+                },
+                watch: {}
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>美团霸王餐</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <!--  vant 组件库 -->
+    <link rel="stylesheet" href="./css/vant.css"/>
+    <link rel="stylesheet" href="./css/detail.css"/>
+    <link rel="stylesheet" href="./css/util.css"/>
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+        html {
+            font-size: 13.33vw;
+        }
+
+        body {
+            background-color: #F5F5F5;
+        }
+
+        p, spam, div {
+            font-size: 0.3rem;
+        }
+        .shadow{
+            display: none;
+        }
+        .show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="detail" v-cloak>
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+        <div class="banner">
+            <van-swipe :autoplay="5000" :loop="true" indicator-color="#FF4B10">
+                <van-swipe-item v-for="(item, index) in detail.piclist" :key="index">
+                    <img :src="baseimg+item" v-if="item"/>
+                </van-swipe-item>
+            </van-swipe>
+        </div>
+        <div class="info">
+            <div class="infoname">{{detail.title}}</div>
+            <div class="infotime">
+                <span class="opentime">{{detail.open_prize_time1}}开奖</span>
+                <span class="closetime">截止报名时间：{{detail.end_time1}}</span>
+            </div>
+            <div class="infodes">
+                {{detail.short_title}}
+            </div>
+            <div class="infoprice">
+                <p>
+                    <span class="pricetitle">原价:</span>
+                    <span class="price">{{detail.price}}</span>
+                    <span class="bawangnum">霸王名额:{{detail.prize_number}}</span>
+                </p>
+                <p>
+                    <img src="./static/image/joinman.png"/>
+                    <span>报名人数：{{detail.use_number}}</span>
+                </p>
+            </div>
+        </div>
+        <div class="address" v-for="(item,index) in detail.shop" :key="" index>
+            <img :src="baseimg + item.shop_pic"/>
+            <div class="addressinfo">
+                <div class="addressdesc" @click="goshoplist">
+                    <p>{{item.shop_name}}</p>
+                    <P>营业时间：{{item.open_door}}</P>
+                    <p>{{item.address}}<span class="right" style="color: #FFC91F"> > </span></p>
+                </div>
+                <div class="contect">
+                    <a :href="'tel:'+item.mobile">
+                        <img src="./static/image/tel.png"/>
+                    </a>
+                    <p>联系电话</p>
+                </div>
+            </div>
+        </div>
+        <div class="richhtml" v-html="detail.content"></div>
+    </van-pull-refresh>
+
+    <div class="detailbottom">
+        <img src="./static/image/share.png" @click="share"/>
+        <div class="joinnow" v-if="detail.isend" style="background: #FFE592">已结束</div>
+        <div class="joinnow" :class="detail.is_signUp > 0 ? 'alljoin' : ''" @click="joinnow" v-else>
+            {{detail.is_signUp > 0 ? '已报名' : '立即报名'}}
+        </div>
+    </div>
+    <img :class="['shadow', showshareguide?'show':'']" src="./static/image/shareguide.png" class="shareguide" @click="iknow" />
+</div>
+
+
+</body>
+<script src="./js/vue.js"></script>
+<script src="./js/zepto.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.1/lib/vant.min.js"></script>
+<script src="./css/util.css"></script>
+<script src="./js/util.js"></script>
+<script src="./js/jweixin-1.6.0.js"></script>
+<script>
+    new Vue({
+        el: "#detail",
+        data() {
+            return {
+                code: '',
+                id: '',
+                parent_id: '',
+                detail: null,
+                baseimg: 'http://macheng.yongmiaonet.com',
+                showshareguide: false,
+                isLoading:false
+            }
+        },
+        created() {
+            setCookie('shoplist', '', -1);
+            var location = window.location.href;
+            var params = location.split('?')[1];
+            var arr = params.split('&');
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].split('=')[0] == 'code') {
+                    this.code = arr[i].split('=')[1];
+                }
+                if (arr[i].split('=')[0] == 'parent_id') {
+                    this.parent_id = arr[i].split('=')[1];
+                }
+                if (arr[i].split('=')[0] == 'id') {
+                    this.id = arr[i].split('=')[1];
+                }
+            }
+            var user = getCookie('user');
+            if (this.parent_id) {
+                if (!this.code && !user) {
+                    this.reflogin();
+                } else if (this.code && !user) {
+                    $.getJSON(baseurl + 'login/register?code=' + this.code + '&parent_id=', (res) => {
+                        if (res.code == 0) {
+                            setCookie('user', JSON.stringify(res.data), 30);
+                            this.invited();
+                        }
+                    })
+                } else if (user) {
+                    this.invited();
+                }
+            } else {
+                if (!this.code && !user) {
+                    this.reflogin();
+                } else if (this.code && !user) {
+                    $.getJSON(baseurl + 'login/register?code=' + this.code + '&parent_id=', (res) => {
+                        if (res.code == 0) {
+                            setCookie('user', JSON.stringify(res.data), 30);
+                            this.getdetail();
+                        }
+                    })
+                } else if (user) {
+                    this.getdetail();
+                }
+            }
+        },
+        mounted() {
+
+        },
+        methods: {
+            //被邀请人请求的接口
+            invited() {
+                let token = JSON.parse(getCookie('user')).token;
+                $.getJSON(baseurl + 'Activity/forward_callback?token=' + token + '&user_id=' + this.parent_id + '&activity_id=' + this.id, (res) => {
+                    this.getdetail();
+                })
+            },
+            mytoast(msg) {
+                vant.Toast.fail(msg);
+                return false;
+            },
+            onRefresh(){
+                this.detail = null;
+                this.getdetail();
+            },
+            getdetail() {
+                var toast = vant.Toast.loading({
+                    forbidClick: true,
+                    message: "加载中..."
+                });
+                let token = JSON.parse(getCookie('user')).token;
+                //根据微信sdk获取当前的定位
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://macheng.yongmiaonet.com/index/js_sdk_conf',
+                    // data to be added to query string:
+                    data: {url: window.location.href.split('&')[0]},
+                    // type of data we are expecting in return:
+                    dataType: 'json',
+                    timeout: 300,
+                    success: (res) => {
+                        wx.config({
+                            debug: false,
+                            appId: 'wxcc551f499320ae80',
+                            timestamp: res.data.timestamp,
+                            nonceStr: res.data.noncestr,
+                            signature: res.data.signature,
+                            jsApiList: [
+                                'openLocation',
+                                'getLocation',
+                                'updateTimelineShareData',
+                                'updateAppMessageShareData',
+                                'onMenuShareAppMessage',
+                                'onMenuShareTimeline'
+                            ]
+                        });
+                        wx.ready(() => {
+                            //获取地理位置
+                            wx.getLocation({
+                                type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                                success: (res) => {
+                                    var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                                    var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                                    $.getJSON(baseurl + 'activity/details?token=' + token + '&id=' + this.id + '&lat=' + latitude + '&lng=' + longitude, (res) => {
+                                        console.log(token)
+                                        vant.Toast.clear(toast);
+                                        this.isLoading = false;
+                                        if (res.code == 0) {
+                                            res.data.piclist = res.data.piclist.split(',');
+                                            res.data.end_time1 = format(res.data.end_time);
+                                            res.data.open_prize_time1 = format(res.data.open_prize_time);
+                                            res.data.use_end_time1 = format(res.data.use_end_time);
+                                            res.data.use_start_time1 = format(res.data.use_start_time);
+                                            res.data.start_time1 = format(res.data.start_time);
+                                            res.data.isend = !checktime(res.data.start_time, res.data.end_time)
+                                            this.detail = res.data;
+                                        } else if (res.code == 2) {
+                                            setCookie('user', "", -1);
+                                            this.reflogin();
+                                        }
+                                        console.log(res)
+                                    })
+                                },
+                                fail: (err) => {
+                                    // vant.Toast('获取定位失败请重试');
+                                    //定位失败用北京的定位
+                                    var latitude = '39.915156'; // 纬度，浮点数，范围为90 ~ -90
+                                    var longitude = '116.403694'; // 经度，浮点数，范围为180 ~ -180。
+                                    $.getJSON(baseurl + 'activity/details?token=' + token + '&id=' + this.id + '&lat=' + latitude + '&lng=' + longitude, (res) => {
+                                        console.log(token)
+                                        vant.Toast.clear(toast);
+                                        this.isLoading = false;
+                                        if (res.code == 0) {
+                                            res.data.piclist = res.data.piclist.split(',');
+                                            res.data.end_time1 = format(res.data.end_time);
+                                            res.data.open_prize_time1 = format(res.data.open_prize_time);
+                                            res.data.use_end_time1 = format(res.data.use_end_time);
+                                            res.data.use_start_time1 = format(res.data.use_start_time);
+                                            res.data.start_time1 = format(res.data.start_time);
+                                            res.data.isend = !checktime(res.data.start_time, res.data.end_time)
+                                            this.detail = res.data;
+                                        } else if (res.code == 2) {
+                                            setCookie('user', "", -1);
+                                            this.reflogin();
+                                        }
+                                        console.log(res)
+                                    })
+                                }
+                            });
+                        });
+                    },
+                    error: function (xhr, type) {
+                        window.history.go(-1); //返回上一页
+                    }
+                })
+            },
+            joinnow() {
+                if (this.detail.is_signUp > 0) {
+                    vant.Toast('您已报名参加该活动');
+                    return false;
+                }
+                var flag = checktime(this.detail.start_time, this.detail.endtime);
+                if (!flag) {
+                    vant.Toast('活动已结束或未开始');
+                    return false
+                } else {
+                    let token = JSON.parse(getCookie('user')).token;
+                    $.getJSON(baseurl + 'order/add?token=' + token + '&id=' + this.id, res => {
+                        console.log(res);
+                        if (res.code == 0) {
+                            vant.Toast('报名成功');
+                            this.detail.is_signUp = 1;
+                            // window.location.href = 'joinsuccess.html?open=' + this.detail.open_prize_time1;
+                        } else if(res.code == 1){
+                            vant.Toast(res.msg);
+                        }else if (res.code == 2) {
+                            setCookie('user', "", -1);
+                            this.reflogin();
+                        }
+                    })
+                }
+            },
+            //重新登录
+            reflogin() {
+                // 请求授权
+                const callbackURL = encodeURIComponent('http://macheng.yongmiaonet.com/public/macheng/detail.html?id=' + this.id + '&parent_id=' + this.parent_id);
+                const wechatId = 'wxcc551f499320ae80';
+                const redirectURI =
+                    `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wechatId}&redirect_uri=${callbackURL}&response_type=code&scope=snsapi_userinfo&state=login#wechat_redirect`
+                window.location.replace(redirectURI);
+            },
+            goshoplist() {
+                var shoplist = JSON.stringify(this.detail.shop);
+                setCookie('shoplist', encodeURI(shoplist), 1)
+                window.location.href = "shoplist.html";
+            },
+            share() {
+                var user_id = JSON.parse(getCookie('user')).user_id;
+                this.showshareguide = true;
+                wx.ready(() => {
+                    wx.updateAppMessageShareData({
+                        title: this.detail.title,
+                        desc: this.detail.short_title,
+                        link: 'http://macheng.yongmiaonet.com/public/macheng/detail.html?parent_id=' + user_id + '&id=' + this.detail.id,
+                        imgUrl: this.baseimg + this.detail.picurl,
+                        success: function (res) {
+                            console.log(res, 'okokokokokokokokok')
+                        }
+                    });
+                    // 分享到朋友圈的接口
+                    wx.updateTimelineShareData({
+                        title: this.detail.title,
+                        link: 'http://macheng.yongmiaonet.com/public/macheng/detail.html?parent_id=' + user_id + '&id=' + this.detail.id,
+                        imgUrl: this.baseimg + this.detail.picurl,
+                        success: function (res) {
+                            console.log(res, 'okokokokokokokokok')
+                        }
+                    })
+                })
+            },
+            iknow() {
+                this.showshareguide = false;
+            }
+        }
+    })
+</script>
+</html>
